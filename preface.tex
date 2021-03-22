@@ -1,0 +1,77 @@
+%preface for the main.tex
+\usepackage[a4paper]{geometry} %设置纸张为A4大小
+\usepackage{amsmath} %最常用的数学宏包
+\usepackage{amssymb} %提供了额外的数学字体和数学符号
+\usepackage{mathtools} %提供了额外的数学工具，如dcases环境
+\usepackage{lipsum} %英语假文宏包
+\usepackage{graphicx} %插入图片宏包
+\usepackage{float} %在浮动体中可使用H选项
+\usepackage{extarrows} %提供了额外的箭头，如可随文字延长的各种箭头
+\usepackage{array} %可增加更多的表格列限定符
+\usepackage{dcolumn} %可使用小数点对齐的列
+\usepackage{booktabs} %可使用三线表
+\usepackage{bm}
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{hyperref} %可使用超链接(含链接的跳转和一些命令)
+\hypersetup{
+	colorlinks=true,
+	citecolor=magenta,%设置cite类命令超链接的颜色
+	linkcolor=blue,%设置目录、脚注、ref等超链接的颜色
+	urlcolor=violet,%设置网页超链接的颜色
+}
+
+\usepackage{listings}
+\input{listings-stata.tex} %导入Stata的listings配置文件
+\lstset{ % Stata 语言全局设置
+	language=Stata,
+	basicstyle={\ttfamily},
+	commentstyle={\itshape\color{gray}}, %设置注释的文字格式
+	keywordstyle={[1]\color{Magenta}}, %设置首要关键字的文字格式
+	keywordstyle={[2]\color{blue}}, %设置函数关键字的文字格式
+	stringstyle={\color{Purple}}, %设置字符串的文字格式
+	emph={}, %使前面 LaTeX 语言所设定的 emph 失效
+	breaklines=true,
+	tabsize=4,
+	frame=trBL,
+	frameround=fttt,
+	flexiblecolumns=true,
+}
+
+\usepackage[amsmath,thmmarks]{ntheorem} %定理类环境宏包，如果前面使用amsmath宏包，则需加上amsmath宏包选项以避免出现未知问题，若需在定理环境末尾加上特定符号(如证毕符号)，则需使用thmmarks宏包选项以使用\theoremsymbol{}命令。
+{
+	\theoremstyle{plain}
+	\setlength{\theoremindent}{0em}
+	\newtheorem{definition}{Definition}
+}
+{
+	\theoremstyle{plain}
+	\setlength{\theoremindent}{0em}
+	\newtheorem{lemma}[definition]{Lemma}
+}
+{
+	\theoremstyle{plain}
+	\setlength{\theoremindent}{0em}
+	\newtheorem{theorem}[definition]{Theorem}
+}
+{
+	\theoremstyle{plain}
+	\setlength{\theoremindent}{0em}
+	\newtheorem{corollary}[definition]{Corollary}
+}
+{
+	\theoremstyle{nonumberplain}
+	\setlength{\theoremindent}{0em}
+	\theorembodyfont{\normalfont}
+	\theoremsymbol{$\blacksquare$} %在证明环境末尾加上一个证毕符号
+	\newtheorem{proof}{Proof}
+}
+
+%定义新命令与新运算符
+\DeclareMathOperator{\diff}{d\!}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\avar}{\mathrm{Avar}}
+\newcommand{\cov}{\mathrm{Cov}}
+
+%重定义列表
+\renewcommand{\labelenumii}{\theenumii.}

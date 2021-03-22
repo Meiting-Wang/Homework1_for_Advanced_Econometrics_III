@@ -1,0 +1,36 @@
+\begin{table}[H]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Regression results}\vspace{0.2em}\label{tab:5.7-c}
+\begin{tabular}{l*{4}{D{.}{.}{-1}}}
+\toprule
+          &\multicolumn{1}{c}{\hspace{1.3em}(1)}&\multicolumn{1}{c}{\hspace{1.3em}(2)}&\multicolumn{1}{c}{\hspace{1.3em}(3)}&\multicolumn{1}{c}{\hspace{1.3em}(4)}\\
+          &\multicolumn{1}{c}{\hspace{1.3em}OLS}&\multicolumn{1}{c}{\hspace{1.3em}OLS}&\multicolumn{1}{c}{\hspace{1.3em}2SLS-iq}&\multicolumn{1}{c}{\hspace{1.3em}2SLS-kww}\\
+\midrule
+iq        &    0.004\sym{***}&                  &    0.015\sym{**} &                  \\
+          &  (0.001)         &                  &  (0.007)         &                  \\
+kww       &                  &    0.005\sym{**} &                  &    0.025\sym{*}  \\
+          &                  &  (0.002)         &                  &  (0.014)         \\
+educ      &    0.054\sym{***}&    0.058\sym{***}&    0.016         &    0.026         \\
+          &  (0.007)         &  (0.007)         &  (0.025)         &  (0.024)         \\
+exper     &    0.014\sym{***}&    0.012\sym{***}&    0.016\sym{***}&    0.007         \\
+          &  (0.003)         &  (0.003)         &  (0.004)         &  (0.006)         \\
+tenure    &    0.011\sym{***}&    0.011\sym{***}&    0.008\sym{**} &    0.005         \\
+          &  (0.003)         &  (0.003)         &  (0.003)         &  (0.004)         \\
+married   &    0.200\sym{***}&    0.189\sym{***}&    0.190\sym{***}&    0.161\sym{***}\\
+          &  (0.039)         &  (0.039)         &  (0.047)         &  (0.053)         \\
+south     &   -0.080\sym{***}&   -0.092\sym{***}&   -0.048         &   -0.092\sym{***}\\
+          &  (0.028)         &  (0.027)         &  (0.040)         &  (0.033)         \\
+urban     &    0.182\sym{***}&    0.176\sym{***}&    0.187\sym{***}&    0.148\sym{***}\\
+          &  (0.027)         &  (0.027)         &  (0.032)         &  (0.040)         \\
+black     &   -0.143\sym{***}&   -0.164\sym{***}&    0.040         &   -0.042         \\
+          &  (0.038)         &  (0.039)         &  (0.105)         &  (0.082)         \\
+\_cons    &    5.176\sym{***}&    5.359\sym{***}&    4.472\sym{***}&    5.218\sym{***}\\
+          &  (0.121)         &  (0.113)         &  (0.441)         &  (0.157)         \\
+\midrule
+\(R^{2}\) &    0.263         &    0.259         &    0.155         &    0.156         \\
+\(N\)     &      \multicolumn{1}{c}{\hspace{1.4em}935}         &      \multicolumn{1}{c}{\hspace{1.4em}935}         &      \multicolumn{1}{c}{\hspace{1.4em}722}         &      \multicolumn{1}{c}{\hspace{1.4em}722}         \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Robust standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}
