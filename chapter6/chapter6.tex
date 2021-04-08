@@ -1,0 +1,98 @@
+\begin{enumerate}
+    %problem boundary--------------------------------------------------------------------
+    \item[6.2] In Problem 5.8b, test the null hypothesis that $educ$ and $IQ$ are exogenous in the equation estimated by 2SLS. (\textcolor{red}{see p126-127})
+    
+    \textbf{Answer:} Let $\mathbf{z}=(\mathbf{z}_1,\mathbf{z}_2)$, where $\mathbf{z}_1$ are the original exogenous variables and $\mathbf{z}_2$ are the IV variables. We first obtain the residuals($\hat{v}_1$ and $\hat{v}_2$) from the reduced form regressions below:
+    \begin{align*}
+        educ = \mathbf{z}\bm{\pi}_1 + v_1 \\ 
+        IQ = \mathbf{z}\bm{\pi}_2 + v_2 \\ 
+    \end{align*}
+    Then, do the regression below and test whether the coefficients $\rho_1$ and $\rho_2$ are zero.
+    \[ lwage = \mathbf{z}_1\bm{\delta}_1 + \alpha_1 educ + \alpha_2 IQ + \rho_1\hat{v}_1 + \rho_2\hat{v}_2 + error \]
+    From the test result below, we find a strong evidence for the endogeneity of at least one of $educ$ and $IQ$. 
+    \input{chapter6/code-6.2}
+    
+    %problem boundary--------------------------------------------------------------------
+    \item[6.4] Consider a structural linear model with unobserved variable $q$ :
+    \[ y=\mathbf{x} \boldsymbol{\beta}+q+v, \quad \mathrm{E}(v \mid \mathbf{x}, q)=0 \]
+    Suppose, in addition, that $\mathrm{E}(q \mid \mathbf{x})=\mathbf{x} \boldsymbol{\delta}$ for some $K \times 1$ vector $\boldsymbol{\delta} ;$ thus, $q$ and $\mathbf{x}$ are possibly correlated. (\textcolor{red}{see p137-140})
+    \begin{enumerate}
+        \item Show that $\mathrm{E}(y \mid \mathbf{x})$ is linear in $\mathbf{x}$. What consequences does this fact have for tests of functional form to detect the presence of $q$ ? Does it matter how strongly $q$ and $\mathbf{x}$ are correlated? Explain.
+        
+        \textbf{Answer:} From the Law of Iterated Expectation,
+        \begin{align*}
+            \E(v\mid\mathbf{x}) &= \E\left[ \E\left( v\mid\mathbf{x},q \right)\mid\mathbf{x} \right] = 0 \implies \\
+            \E(y\mid\mathbf{x}) &= \mathbf{x} \boldsymbol{\beta} + \E(q\mid\mathbf{x}) + \E(v\mid\mathbf{x}) = \mathbf{x}(\bm{\beta}+\bm{\delta}) = \mathbf{x}\bm{\gamma}
+        \end{align*}
+        where $\bm{\gamma} = \bm{\beta}+\bm{\delta}$, so the $\E(v\mid\mathbf{x})$ is linear in $\mathbf{x}$. From the result above, there is no functional form misspecification in this conditional expectation so that no functional form test will detect the presence of $q$, no matter how strongly $q$ and $\mathbf{x}$ are correlated.
+        
+        \item Now add the assumptions $\operatorname{Var}(v \mid \mathbf{x}, q)=\sigma_{v}^{2}$ and $\operatorname{Var}(q \mid \mathbf{x})=\sigma_{q}^{2}$. Show that $\operatorname{Var}(y \mid \mathbf{x})$ is constant. (Hint: $\mathrm{E}(q v \mid \mathbf{x})=0$ by iterated expectations.) What does this fact imply about using tests for heteroskedasticity to detect omitted variables?
+        
+        \textbf{Answer:} Firstly, we will get the result of $\var(v\mid \mathbf{x})$: 
+        \begin{align*}
+            \E(v^2\mid \mathbf{x},q) &= \var(v\mid \mathbf{x},q) + \left[ \E(v\mid \mathbf{x},q) \right]^2 = \sigma^2_v \implies \\
+            \E(v^2\mid \mathbf{x}) &= \E\left[ \E\left( v^2\mid \mathbf{x},q \right)\mid \mathbf{x} \right] = \sigma^2_v \implies \\
+            \var(v\mid \mathbf{x}) &= \E(v^2\mid \mathbf{x}) - \left[ \E(v\mid \mathbf{x}) \right]^2 = \sigma^2_v
+        \end{align*}
+        Secondly, we will get the result of $\cov(q,v\mid \mathbf{x})$:
+        \begin{align*}
+            \E(qv\mid \mathbf{x}) &= \E\left[ \E\left( qv\mid \mathbf{x},q \right)\mid \mathbf{x} \right] = \E\left[ q \E \left( v\mid \mathbf{x},q \right)\mid \mathbf{x} \right] = 0 \implies \\
+            \cov(q,v\mid \mathbf{x}) &= \E(qv\mid \mathbf{x}) - \E(q\mid \mathbf{x}) \E(v\mid \mathbf{x}) = 0
+        \end{align*}
+        Using the result above, we can obtain the result of $\var(y\mid \mathbf{x})$: 
+        \[ \var(y\mid \mathbf{x}) = \var(q+v\mid \mathbf{x}) = \var(q\mid \mathbf{x}) + \var(v\mid \mathbf{x}) + 2\cov(q,v\mid \mathbf{x}) = \sigma^2_q + \sigma^2_v \]
+        so that $y$ is conditionally homoskedastic. However, Along with $\E(y\mid \mathbf{x}) = \mathbf{x}\bm{\gamma}$ and $\var(y\mid \mathbf{x})$ being constant, a test for heteroskedasticity will always have a limiting $\chi^2$ distribution, so it will have no power for detecting omitted variables.
+        
+        \item Now write the equation as $y=\mathbf{x} \boldsymbol{\beta}+u,$ where $\mathrm{E}\left(\mathbf{x}^{\prime} u\right)=\mathbf{0}$ and $\operatorname{Var}(u \mid  \mathbf{x})=\sigma^{2}$. If $\mathrm{E}(u \mid  \mathbf{x}) \neq \mathrm{E}(u),$ argue that an $\mathrm{LM}$ test of the form (6.38) will detect ``heteroskedasticity'' in $u$, at least in large samples.
+        
+        \textbf{Answer:} Recall the equation \eqref{eq:6.4-c-1}: 
+        \begin{gather}
+            \text{regress } \hat{u}_i^2 \text{ on } 1, \mathbf{h}_i, \quad i = 1,2,\ldots,N \tag{6.38} \label{eq:6.4-c-1}
+        \end{gather}
+        If $\E(u\mid \mathbf{x}) = C$(a constant), then $\E(u) = \E(u\mid \mathbf{x}) = C$. Due to $\E(u) \neq \E(u\mid \mathbf{x})$, it implies that $\E(u\mid \mathbf{x})$ is not a constant and will generally be a function of $\mathbf{x}$ $\implies$ $\left[ \E(u\mid \mathbf{x}) \right]^2$ will generally be a function of $\mathbf{x}$ $\implies$ $\E(u^2\mid \mathbf{x}) = \var(u\mid \mathbf{x}) + \left[ \E(u\mid \mathbf{x}) \right]^2 = \sigma^2 + \left[ \E(u\mid \mathbf{x}) \right]^2$ will generally be a function of $\mathbf{x}$. Therefore, the LM test of the equation \eqref{eq:6.4-c-1} will be a significant result. That is, the LM test above will detect ``heteroskedasticity'' in $u$, at least in large samples, although there is not the case.
+    \end{enumerate}
+    
+    \item[6.12] (Adapted) In the linear model $y = \mathbf{x}\bm{\beta} + u$, (\textcolor{red}{see p97, p130})
+    \begin{enumerate}
+        \item Under the appropriate homoskedasticity assumption, show that
+        \[ \var\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) = \var\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} \right) - \var\left( \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \]
+        
+        \textbf{Answer:} In the 2SLS and OLS, we know that
+        \begin{gather*}
+            \hat{\bm{\beta}}_{\mathrm{2SLS}} = \bm{\beta} + \left( \hat{\mathbf{X}}^\prime \hat{\mathbf{X}} \right)^{-1} \hat{\mathbf{X}}^\prime u \\
+            \hat{\bm{\beta}}_{\mathrm{OLS}} = \bm{\beta} + \left( \mathbf{X}^\prime \mathbf{X} \right)^{-1} \mathbf{X}^\prime u
+        \end{gather*}
+        where $\hat{\mathbf{X}} = \mathbf{P}_{\mathbf{Z}} \mathbf{X}$ and $\mathbf{P}_{\mathbf{Z}} = \mathbf{Z}(\mathbf{Z}^\prime \mathbf{Z})^{-1} \mathbf{Z}^\prime$ is an idempotent and symmetric matrix. It is easy to show that $\hat{\mathbf{X}}^\prime \hat{\mathbf{X}} = \hat{\mathbf{X}}^\prime \mathbf{X}$, so
+        \begin{align*}
+            \cov\left( \hat{\bm{\beta}}_{\mathrm{2SLS}}, \hat{\bm{\beta}}_{\mathrm{OLS}} \right) &= \cov\left[ \left( \hat{\mathbf{X}}^\prime \hat{\mathbf{X}} \right)^{-1} \hat{\mathbf{X}}^\prime u, \left( \mathbf{X}^\prime \mathbf{X} \right)^{-1} \mathbf{X}^\prime u \right] \\
+            &= \left( \hat{\mathbf{X}}^\prime \hat{\mathbf{X}} \right)^{-1} \hat{\mathbf{X}}^\prime \cov(u,u) \mathbf{X} \left( \mathbf{X}^\prime \mathbf{X} \right)^{-1} \\
+            &= \sigma^2 \left( \hat{\mathbf{X}}^\prime \hat{\mathbf{X}} \right)^{-1} \hat{\mathbf{X}}^\prime \mathbf{X} \left( \mathbf{X}^\prime \mathbf{X} \right)^{-1} \\
+            &= \sigma^2 \left( \mathbf{X}^\prime \mathbf{X} \right)^{-1} = \var\left( \hat{\bm{\beta}}_{\mathrm{OLS}} \right)
+        \end{align*}
+        After the same steps, 
+        \[ \cov\left( \hat{\bm{\beta}}_{\mathrm{OLS}}, \hat{\bm{\beta}}_{\mathrm{2SLS}} \right) = \sigma^2 \left( \mathbf{X}^\prime \mathbf{X} \right)^{-1} = \var\left( \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \]
+        Using the results above, we can obtain
+        \begin{align*}
+            \var\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) &= \var\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} \right) + \var\left( \hat{\bm{\beta}}_{\mathrm{OLS}} \right) - \cov\left( \hat{\bm{\beta}}_{\mathrm{2SLS}}, \hat{\bm{\beta}}_{\mathrm{OLS}} \right) - \cov\left( \hat{\bm{\beta}}_{\mathrm{OLS}}, \hat{\bm{\beta}}_{\mathrm{2SLS}} \right) \\
+            &= \var\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} \right) - \var\left( \hat{\bm{\beta}}_{\mathrm{OLS}} \right)
+        \end{align*}
+        
+        \item Prove that
+        \[ \left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right)^\prime \left[ \var\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} \right) - \var\left( \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \right]^{-1} \left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \stackrel{a}{\scalebox{2}[1]{$\sim$}} \chi^2_k \]
+        where $k$ is the number of parameters in the linear model.
+        
+        \textbf{Answer:} we know that
+        \[ \sqrt{N}\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \stackrel{a}{\scalebox{2}[1]{$\sim$}} N \left( \mathbf{0}, \avar\left( \sqrt{N}\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \right) \right) \]
+        and if $\mathbf{Y} \sim N_n(\mathbf{0},\bm{\Sigma})$, where $\bm{\Sigma}$ is positive definite,
+        \[ \mathbf{Y}^\prime \bm{\Sigma}^{-1}\mathbf{Y} \sim \chi^2_n \]
+        so, from the Continuous Mapping Theorem, we have
+        \[ \left[ \sqrt{N}\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \right]^\prime \left[ \avar\left( \sqrt{N}\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \right) \right]^{-1} \left[ \sqrt{N}\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \right] \stackrel{a}{\scalebox{2}[1]{$\sim$}} \chi^2_k \]
+        That is,
+        \[ \left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right)^\prime \left[ \var\left( \hat{\bm{\beta}}_{\mathrm{2SLS}} \right) - \var\left( \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \right]^{-1} \left( \hat{\bm{\beta}}_{\mathrm{2SLS}} - \hat{\bm{\beta}}_{\mathrm{OLS}} \right) \stackrel{a}{\scalebox{2}[1]{$\sim$}} \chi^2_k \]
+    \end{enumerate}
+    
+    \item[6.13] Referring to equations (6.17) and (6.18) , show that if $\mathrm{E}\left(u_{1} \mid \mathbf{z}\right)=0$ and $\mathrm{E}\left(u_{1} \mid \mathbf{z}, v_{2}\right)=\rho_{1} v_{2},$ then $\mathrm{E}\left(v_{2} \mid \mathbf{z}\right)=0$. (\textcolor{red}{see p128-129})
+    
+    \textbf{Answer:} From the Law of Iterated expectation,
+    \[ 0 = \E(u_1 \mid \mathbf{z}) = \E\left[ \E(u_1 \mid \mathbf{z},v_2)\mid \mathbf{z} \right] = \rho_1 \E(v_2 \mid \mathbf{z}) \implies \E(v_2 \mid \mathbf{z}) = 0 \]
+\end{enumerate}

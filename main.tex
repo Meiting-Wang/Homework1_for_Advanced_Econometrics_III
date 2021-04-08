@@ -7,7 +7,7 @@
 \title{
 	Problem sets for Advanced Econometrics III
 }
-\author{Meiting Wang\thanks{Meiting Wang, Student ID: 202020111002, Email: wangmeiting92@gmail.com}}
+\author{Meiting Wang\thanks{Meiting Wang, Email: wangmeiting92@gmail.com}}
 \date{\today}
 
 
@@ -31,66 +31,9 @@
 \clearpage
 \section*{Chapter 6}
 \addcontentsline{toc}{section}{Chapter 6}
+\input{chapter6/chapter6.tex}
 
-\begin{enumerate}
-    %problem boundary--------------------------------------------------------------------
-    \item[6.2] In Problem 5.8b, test the null hypothesis that $educ$ and $IQ$ are exogenous in the equation estimated by 2SLS. (\textcolor{red}{see p126-127})
-    
-    \textbf{Answer:} Let $\mathbf{z}=(\mathbf{z}_1,\mathbf{z}_2)$, where $\mathbf{z}_1$ are the original exogenous variables and $\mathbf{z}_2$ are the IV variables. We first obtain the residuals($\hat{v}_1$ and $\hat{v}_2$) from the reduced form regressions below:
-    \begin{align*}
-        educ = \mathbf{z}\bm{\pi}_1 + v_1 \\ 
-        IQ = \mathbf{z}\bm{\pi}_2 + v_2 \\ 
-    \end{align*}
-    Then, do the regression below and test whether the coefficients $\rho_1$ and $\rho_2$ are zero.
-    \[ lwage = \mathbf{z}_1\bm{\delta}_1 + \alpha_1 educ + \alpha_2 IQ + \rho_1\hat{v}_1 + \rho_2\hat{v}_2 + error \]
-    From the test result below, we find a strong evidence for the endogeneity of at least one of $educ$ and $IQ$. 
-    \input{chapter6/code-6.2}
-    
-    %problem boundary--------------------------------------------------------------------
-    \item[6.4] Consider a structural linear model with unobserved variable $q$ :
-    \[ y=\mathbf{x} \boldsymbol{\beta}+q+v, \quad \mathrm{E}(v | \mathbf{x}, q)=0 \]
-    Suppose, in addition, that $\mathrm{E}(q \mid \mathbf{x})=\mathbf{x} \boldsymbol{\delta}$ for some $K \times 1$ vector $\boldsymbol{\delta} ;$ thus, $q$ and $\mathbf{x}$ are possibly correlated. (\textcolor{red}{see p137-140})
-    \begin{enumerate}
-        \item Show that $\mathrm{E}(y | \mathbf{x})$ is linear in $\mathbf{x}$. What consequences does this fact have for tests of functional form to detect the presence of $q$ ? Does it matter how strongly $q$ and $\mathbf{x}$ are correlated? Explain.
-        
-        \textbf{Answer:} From the Law of Iterated Expectation,
-        \begin{align*}
-            \E(v|\mathbf{x}) &= \E\left[ \E\left( v|\mathbf{x},q \right)|\mathbf{x} \right] = 0 \implies \\
-            \E(y|\mathbf{x}) &= \mathbf{x} \boldsymbol{\beta} + \E(q|\mathbf{x}) + \E(v|\mathbf{x}) = \mathbf{x}(\bm{\beta}+\bm{\delta}) = \mathbf{x}\bm{\gamma}
-        \end{align*}
-        where $\bm{\gamma} = \bm{\beta}+\bm{\delta}$, so the $\E(v|\mathbf{x})$ is linear in $\mathbf{x}$. From the result above, there is no functional form misspecification in this conditional expectation so that no functional form test will detect the presence of $q$, no matter how strongly $q$ and $\mathbf{x}$ are correlated.
-        
-        \item Now add the assumptions $\operatorname{Var}(v | \mathbf{x}, q)=\sigma_{v}^{2}$ and $\operatorname{Var}(q | \mathbf{x})=\sigma_{q}^{2}$. Show that $\operatorname{Var}(y | \mathbf{x})$ is constant. (Hint: $\mathrm{E}(q v | \mathbf{x})=0$ by iterated expectations.) What does this fact imply about using tests for heteroskedasticity to detect omitted variables?
-        
-        \textbf{Answer:} Firstly, we will get the result of $\var(v|\mathbf{x})$: 
-        \begin{align*}
-            \E(v^2|\mathbf{x},q) &= \var(v|\mathbf{x},q) + \left[ \E(v|\mathbf{x},q) \right]^2 = \sigma^2_v \implies \\
-            \E(v^2|\mathbf{x}) &= \E\left[ \E\left( v^2|\mathbf{x},q \right)|\mathbf{x} \right] = \sigma^2_v \implies \\
-            \var(v|\mathbf{x}) &= \E(v^2|\mathbf{x}) - \left[ \E(v|\mathbf{x}) \right]^2 = \sigma^2_v
-        \end{align*}
-        Secondly, we will get the result of $\cov(q,v|\mathbf{x})$:
-        \begin{align*}
-            \E(qv|\mathbf{x}) &= \E\left[ \E\left( qv|\mathbf{x},q \right)|\mathbf{x} \right] = \E\left[ q \E \left( v|\mathbf{x},q \right)|\mathbf{x} \right] = 0 \implies \\
-            \cov(q,v|\mathbf{x}) &= \E(qv|\mathbf{x}) - \E(q|\mathbf{x}) \E(v|\mathbf{x}) = 0
-        \end{align*}
-        Using the result above, we can obtain the result of $\var(y|\mathbf{x})$: 
-        \[ \var(y|\mathbf{x}) = \var(q+v|\mathbf{x}) = \var(q|\mathbf{x}) + \var(v|\mathbf{x}) + 2\cov(q,v|\mathbf{x}) = \sigma^2_q + \sigma^2_v \]
-        so that $y$ is conditionally homoskedastic. However, Along with $\E(y|\mathbf{x}) = \mathbf{x}\bm{\gamma}$ and $\var(y|\mathbf{x})$ being constant, a test for heteroskedasticity will always have a limiting $\chi^2$ distribution, so it will have no power for detecting omitted variables.
-        
-        \item Now write the equation as $y=\mathbf{x} \boldsymbol{\beta}+u,$ where $\mathrm{E}\left(\mathbf{x}^{\prime} u\right)=\mathbf{0}$ and $\operatorname{Var}(u | \mathbf{x})=\sigma^{2}$. If $\mathrm{E}(u | \mathbf{x}) \neq \mathrm{E}(u),$ argue that an $\mathrm{LM}$ test of the form (6.38) will detect "heteroskedasticity" in $u,$ at least in large samples.
-        
-        \textbf{Answer:} Recall the equation \eqref{eq:6.4-c-1}: 
-        \begin{gather}
-            \text{regress } \hat{u}_i^2 \text{ on } 1, \mathbf{h}_i, \quad i = 1,2,\ldots,N \tag{6.38} \label{eq:6.4-c-1}
-        \end{gather}
-        If $\E(u|\mathbf{x}) = C$(a constant), then $\E(u) = \E(u|\mathbf{x}) = C$.
-        
-        
-        
-        
-        
-    \end{enumerate}
-\end{enumerate}
+
 
 
 
