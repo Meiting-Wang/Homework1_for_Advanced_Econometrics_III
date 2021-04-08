@@ -1,0 +1,18 @@
+\begin{lstlisting}
+use nls80.dta, clear
+
+local z1 "exper tenure married south urban black"
+local z2 "kww meduc feduc sibs"
+
+*test rank condition
+qui reg educ `z1' `z2', vce(robust)
+test `z2'
+qui reg iq `z1' `z2', vce(robust)
+test `z2'
+
+*output the regression result
+eststo clear
+eststo: reg lwage `z1' educ iq, vce(robust)
+eststo: ivregress 2sls lwage `z1' (educ iq=`z2'), vce(robust)
+esttab *, b(3) se(3) star(* 0.10 ** 0.05 *** 0.01) r2 obslast compress nogaps mti("OLS" "2SLS") order(educ iq)
+\end{lstlisting}

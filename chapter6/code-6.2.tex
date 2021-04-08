@@ -1,0 +1,23 @@
+\begin{lstlisting}
+use nls80.dta, clear
+
+local z1 "exper tenure married south urban black"
+local z2 "kww meduc feduc sibs"
+
+qui reg educ `z1' `z2'
+predict v1hat, residuals
+qui reg iq `z1' `z2'
+predict v2hat, residuals
+
+qui reg lwage `z1' educ iq v1hat v2hat, vce(robust)
+test v1hat v2hat
+
+/*---------test result---------
+. test v1hat v2hat
+
+ (1)  v1hat = 0
+ (2)  v2hat = 0
+       F(  2,   711) =    4.10
+            Prob > F =    0.0170
+*/
+\end{lstlisting}

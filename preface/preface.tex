@@ -10,8 +10,8 @@
 \usepackage{array} %可增加更多的表格列限定符
 \usepackage{dcolumn} %可使用小数点对齐的列
 \usepackage{booktabs} %可使用三线表
-\usepackage{bm}
-\usepackage[dvipsnames]{xcolor}
+\usepackage{bm} %可在数学环境中使用斜体加粗的命令
+\usepackage[dvipsnames]{xcolor} %扩展版的color宏包
 
 \usepackage{hyperref} %可使用超链接(含链接的跳转和一些命令)
 \hypersetup{
@@ -22,11 +22,11 @@
 }
 
 \usepackage{listings}
-\input{listings-stata.tex} %导入Stata的listings配置文件
+\input{preface/listings-stata.tex} %导入Stata的listings配置文件
 \lstset{ % Stata 语言全局设置
 	language=Stata,
 	basicstyle={\ttfamily},
-	commentstyle={\itshape\color{gray}}, %设置注释的文字格式
+% 	commentstyle={\color{gray}}, %设置注释的文字格式
 	keywordstyle={[1]\color{Magenta}}, %设置首要关键字的文字格式
 	keywordstyle={[2]\color{blue}}, %设置函数关键字的文字格式
 	stringstyle={\color{Purple}}, %设置字符串的文字格式
@@ -72,6 +72,7 @@
 \newcommand{\var}{\mathrm{Var}}
 \newcommand{\avar}{\mathrm{Avar}}
 \newcommand{\cov}{\mathrm{Cov}}
+\newcommand{\E}{\mathrm{E}}
 
 %重定义列表
 \renewcommand{\labelenumii}{\theenumii.}
