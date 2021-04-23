@@ -34,6 +34,128 @@
 \input{chapter6/chapter6.tex}
 
 
+\clearpage
+\section*{Chapter 10}
+\addcontentsline{toc}{section}{Chapter 10}
+
+\begin{enumerate}
+    %problem boundary--------------------------------------------------------------------
+    \item[10.2] Suppose you have $T=2$ years of data on the same group of $N$ working individuals. Consider the following model of wage determination:
+    \[ \log \left(wage_{it}\right)=\theta_{1}+\theta_{2} d 2_{t}+\mathbf{z}_{i t} \bm{\gamma}+\delta_{1} female_{i}+\delta_{2} d 2_{t} \cdot female_{i}+c_{i}+u_{i t} \]
+    The unobserved effect $c_{i}$ is allowed to be correlated with $\mathbf{z}_{i t}$ and $female_{i}$. The variable $d 2_{t}$ is a time period indicator, where $d 2_{t}=1$ if $t=2$ and $d 2_{t}=0$ if $t=1$. In what follows, assume that
+    \[ \mathrm{E}\left(u_{i t} \mid female_{i}, \mathbf{z}_{i 1}, \mathbf{z}_{i 2}, c_{i}\right)=0, \quad t=1,2 \]
+    
+    \begin{enumerate}
+        \item Without further assumptions, what parameters in the log wage equation can be consistently estimated? (\textcolor{red}{see p300-304, p315-319})
+        
+        \textbf{Answer:} Assuming all elements of $\mathbf{z}_{it}$ are time-varying, the parameters $\theta_2, \delta_2 and \mathbf{\gamma}$ can be consistently estimated.
+        
+        \item Interpret the coefficients $\theta_{2}$ and $\delta_{2}$.
+        
+        \textbf{Answer:} Everything else equal, $\theta_2$ measures the growth in wage for men over the period and $\delta_2$ measures the difference in wage growth rate between women and men over the period.
+        
+        \item Write the log wage equation explicitly for the two time periods. Show that the differenced equation can be written as
+        \[ \Delta \log \left(wage_{i}\right)=\theta_{2}+\Delta \mathbf{z}_{i} \bm{\gamma}+\delta_{2} female_{i}+\Delta u_{i} \]
+        where $\Delta \log \left( wage_{i}\right)=\log \left(wage_{i 2}\right)-\log \left(wage_{i 1}\right)$, and so on.
+        
+        \textbf{Answer:} Write
+        \begin{gather}
+            \log \left(wage_{i1}\right)=\theta_{1}+\mathbf{z}_{i1} \bm{\gamma}+\delta_{1} female_{i}+c_{i}+u_{i1} \label{eq:10.2-1} \\
+            \log \left(wage_{i2}\right)=\theta_{1}+\theta_{2}+\mathbf{z}_{i 2} \bm{\gamma}+\delta_{1} female_{i}+\delta_{2} \cdot female_{i}+c_{i}+u_{i2} \label{eq:10.2-2}
+        \end{gather}
+        Equations \eqref{eq:10.2-2} - \eqref{eq:10.2-1}, we have
+        \begin{gather}
+            \Delta \log \left(wage_{i}\right)=\theta_{2}+\Delta \mathbf{z}_{i} \bm{\gamma}+\delta_{2} female_{i}+\Delta u_{i} \label{eq:10.2-3}
+        \end{gather}
+        
+        \item How would you test $\mathrm{H}_{0}: \delta_{2}=0$ if $\operatorname{Var}\left(\Delta u_{i} \mid \Delta \mathbf{z}_{i}, female_{i}\right)$ is not constant?
+        
+        \textbf{Answer:} If $\operatorname{Var}\left(\Delta u_{i} \mid \Delta \mathbf{z}_{i}, female_{i}\right)$ is not constant, we can test $\mathrm{H}_0: \delta_2 = 0$ with a robust variance matrix for equation \eqref{eq:10.2-3}:
+        \[ \widehat{\avar\left(\hat{\boldsymbol{\beta}}_{F D}\right)}=\left(\Delta \mathbf{X}^{\prime} \Delta \mathbf{X}\right)^{-1}\left(\sum_{i=1}^{N} \Delta \mathbf{X}_{i}^{\prime} \widehat{\Delta u_i} \widehat{\Delta u_i}^{\prime} \Delta \mathbf{X}_{i}\right)\left(\Delta \mathbf{X}^{\prime} \Delta \mathbf{X}\right)^{-1} \]
+    \end{enumerate}
+    
+    
+    %problem boundary--------------------------------------------------------------------
+    \item[10.3] For $T=2$ consider the standard unoberved effects model
+    \[ y_{i t}=\mathbf{x}_{i t} \boldsymbol{\beta}+c_{i}+u_{i t}, \quad t=1,2 \]
+    Let $\hat{\boldsymbol{\beta}}_{F E}$ and $\hat{\boldsymbol{\beta}}_{F D}$ denote the fixed effects and first difference estimators, respectively.
+    
+    \begin{enumerate}
+        \item Show that the $\mathrm{FE}$ and $\mathrm{FD}$ estimates are numerically identical.
+        
+        \textbf{Answer:} Let $\Delta\mathbf{x}_i = \mathbf{x}_{i2} - \mathbf{x}_{i1}, \Delta y_i = y_{i2} - y_{i1}, \ddot{\mathbf{x}}_{it} = \mathbf{x}_{it} - \bar{\mathbf{x}}_i, \ddot{y}_{it} = y_{it} - \bar{y}_i$. It is easy to know that $\ddot{\mathbf{x}}_{i1} = -\Delta\mathbf{x}_i/2, \ddot{\mathbf{x}}_{i2} = \Delta\mathbf{x}_i/2$ and $\ddot{y}_{i1} = -\Delta y_i/2, \ddot{y}_{i2} = \Delta y_i/2$. Therefore, the fixed effects estimators can be written as
+        \begin{align*}
+            \hat{\boldsymbol{\beta}}_{F E}&=\left(\sum_{i=1}^{N} \sum_{t=1}^{T} \ddot{\mathbf{x}}_{i t}^{\prime} \ddot{\mathbf{x}}_{i t}\right)^{-1}\left(\sum_{i=1}^{N} \sum_{t=1}^{T} \ddot{\mathbf{x}}_{i t}^{\prime} \ddot{y}_{i t}\right) \\
+            &= \left[\sum_{i=1}^{N}\left(\ddot{\mathbf{x}}_{i 1}^{\prime} \ddot{\mathbf{x}}_{i 1}+\ddot{\mathbf{x}}_{i 2}^{\prime} \ddot{\mathbf{x}}_{i 2}\right)\right]^{-1}\left[\sum_{i=1}^{N}\left(\ddot{\mathbf{x}}_{i 1}^{\prime} \ddot{y}_{i 1}+\ddot{\mathbf{x}}_{i 2}^{\prime} \ddot{y}_{i 2}\right)\right] \\
+            &= \left(\sum_{i=1}^{N} \Delta \mathbf{x}_{i}^{\prime} \Delta \mathbf{x}_{i} / 2\right)^{-1}\left(\sum_{i=1}^{N} \Delta \mathbf{x}_{i}^{\prime} \Delta y_{i} / 2\right) \\
+            &=\left(\sum_{i=1}^{N} \Delta \mathbf{x}_{i}^{\prime} \Delta \mathbf{x}_{i}\right)^{-1}\left(\sum_{i=1}^{N} \Delta \mathbf{x}_{i}^{\prime} \Delta y_{i}\right)=\hat{\boldsymbol{\beta}}_{FD}
+        \end{align*}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        \item Show that the error variance estimates from the FE and FD methods are numerically identical.
+    \end{enumerate}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
