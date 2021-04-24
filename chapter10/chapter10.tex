@@ -1,0 +1,325 @@
+\begin{enumerate}
+    %problem boundary--------------------------------------------------------------------
+    \item[10.2] Suppose you have $T=2$ years of data on the same group of $N$ working individuals. Consider the following model of wage determination:
+    \[ \log \left(wage_{it}\right)=\theta_{1}+\theta_{2} d 2_{t}+\mathbf{z}_{i t} \bm{\gamma}+\delta_{1} female_{i}+\delta_{2} d 2_{t} \cdot female_{i}+c_{i}+u_{i t} \]
+    The unobserved effect $c_{i}$ is allowed to be correlated with $\mathbf{z}_{i t}$ and $female_{i}$. The variable $d 2_{t}$ is a time period indicator, where $d 2_{t}=1$ if $t=2$ and $d 2_{t}=0$ if $t=1$. In what follows, assume that
+    \[ \mathrm{E}\left(u_{i t} \mid female_{i}, \mathbf{z}_{i 1}, \mathbf{z}_{i 2}, c_{i}\right)=0, \quad t=1,2 \]
+    
+    \begin{enumerate}
+        \item Without further assumptions, what parameters in the log wage equation can be consistently estimated? (\textcolor{red}{see p300-304, p315-319})
+        
+        \textbf{Answer:} Assuming all elements of $\mathbf{z}_{it}$ are time-varying, the parameters $\theta_2, \delta_2 and \mathbf{\gamma}$ can be consistently estimated.
+        
+        \item Interpret the coefficients $\theta_{2}$ and $\delta_{2}$.
+        
+        \textbf{Answer:} Everything else equal, $\theta_2$ measures the growth in wage for men over the period and $\delta_2$ measures the difference in wage growth rate between women and men over the period.
+        
+        \item Write the log wage equation explicitly for the two time periods. Show that the differenced equation can be written as
+        \[ \Delta \log \left(wage_{i}\right)=\theta_{2}+\Delta \mathbf{z}_{i} \bm{\gamma}+\delta_{2} female_{i}+\Delta u_{i} \]
+        where $\Delta \log \left( wage_{i}\right)=\log \left(wage_{i 2}\right)-\log \left(wage_{i 1}\right)$, and so on.
+        
+        \textbf{Answer:} Write
+        \begin{gather}
+            \log \left(wage_{i1}\right)=\theta_{1}+\mathbf{z}_{i1} \bm{\gamma}+\delta_{1} female_{i}+c_{i}+u_{i1} \label{eq:10.2-1} \\
+            \log \left(wage_{i2}\right)=\theta_{1}+\theta_{2}+\mathbf{z}_{i 2} \bm{\gamma}+\delta_{1} female_{i}+\delta_{2} \cdot female_{i}+c_{i}+u_{i2} \label{eq:10.2-2}
+        \end{gather}
+        Equations \eqref{eq:10.2-2} - \eqref{eq:10.2-1}, we have
+        \begin{gather}
+            \Delta \log \left(wage_{i}\right)=\theta_{2}+\Delta \mathbf{z}_{i} \bm{\gamma}+\delta_{2} female_{i}+\Delta u_{i} \label{eq:10.2-3}
+        \end{gather}
+        
+        \item How would you test $\mathrm{H}_{0}: \delta_{2}=0$ if $\operatorname{Var}\left(\Delta u_{i} \mid \Delta \mathbf{z}_{i}, female_{i}\right)$ is not constant?
+        
+        \textbf{Answer:} If $\operatorname{Var}\left(\Delta u_{i} \mid \Delta \mathbf{z}_{i}, female_{i}\right)$ is not constant, we can test $\mathrm{H}_0: \delta_2 = 0$ with a robust variance matrix for equation \eqref{eq:10.2-3}:
+        \[ \widehat{\avar\left(\hat{\boldsymbol{\beta}}_{F D}\right)}=\left(\Delta \mathbf{X}^{\prime} \Delta \mathbf{X}\right)^{-1}\left(\sum_{i=1}^{N} \Delta \mathbf{X}_{i}^{\prime} \widehat{\Delta u_i} \widehat{\Delta u_i}^{\prime} \Delta \mathbf{X}_{i}\right)\left(\Delta \mathbf{X}^{\prime} \Delta \mathbf{X}\right)^{-1} \]
+    \end{enumerate}
+    
+    
+    %problem boundary--------------------------------------------------------------------
+    \item[10.3] For $T=2$ consider the standard unoberved effects model
+    \[ y_{i t}=\mathbf{x}_{i t} \boldsymbol{\beta}+c_{i}+u_{i t}, \quad t=1,2 \]
+    Let $\hat{\boldsymbol{\beta}}_{F E}$ and $\hat{\boldsymbol{\beta}}_{F D}$ denote the fixed effects and first difference estimators, respectively. (\textcolor{red}{see p304, p306, p318})
+    
+    \begin{enumerate}
+        \item Show that the $\mathrm{FE}$ and $\mathrm{FD}$ estimates are numerically identical.
+        
+        \textbf{Answer:} Let $\Delta\mathbf{x}_i = \mathbf{x}_{i2} - \mathbf{x}_{i1}, \Delta y_i = y_{i2} - y_{i1}, \ddot{\mathbf{x}}_{it} = \mathbf{x}_{it} - \bar{\mathbf{x}}_i, \ddot{y}_{it} = y_{it} - \bar{y}_i$. It is easy to know that $\displaystyle\ddot{\mathbf{x}}_{i1} = -\frac{\Delta\mathbf{x}_i}{2}, \ddot{\mathbf{x}}_{i2} = \frac{\Delta\mathbf{x}_i}{2}$ and $\displaystyle\ddot{y}_{i1} = -\frac{\Delta y_i}{2}, \ddot{y}_{i2} = \frac{\Delta y_i}{2}$. Therefore, the fixed effects estimators can be written as
+        \begin{align*}
+            \hat{\boldsymbol{\beta}}_{F E}&=\left(\sum_{i=1}^{N} \sum_{t=1}^{T} \ddot{\mathbf{x}}_{i t}^{\prime} \ddot{\mathbf{x}}_{i t}\right)^{-1}\left(\sum_{i=1}^{N} \sum_{t=1}^{T} \ddot{\mathbf{x}}_{i t}^{\prime} \ddot{y}_{i t}\right) \\
+            &= \left[\sum_{i=1}^{N}\left(\ddot{\mathbf{x}}_{i 1}^{\prime} \ddot{\mathbf{x}}_{i 1}+\ddot{\mathbf{x}}_{i 2}^{\prime} \ddot{\mathbf{x}}_{i 2}\right)\right]^{-1}\left[\sum_{i=1}^{N}\left(\ddot{\mathbf{x}}_{i 1}^{\prime} \ddot{y}_{i 1}+\ddot{\mathbf{x}}_{i 2}^{\prime} \ddot{y}_{i 2}\right)\right] \\
+            &= \left(\sum_{i=1}^{N} \frac{\Delta \mathbf{x}_{i}^{\prime} \Delta \mathbf{x}_{i}}{2} \right)^{-1}\left(\sum_{i=1}^{N} \frac{\Delta \mathbf{x}_{i}^{\prime} \Delta y_{i}}{2} \right) \\
+            &=\left(\sum_{i=1}^{N} \Delta \mathbf{x}_{i}^{\prime} \Delta \mathbf{x}_{i}\right)^{-1}\left(\sum_{i=1}^{N} \Delta \mathbf{x}_{i}^{\prime} \Delta y_{i}\right)=\hat{\boldsymbol{\beta}}_{FD}
+        \end{align*}
+        
+        \item Show that the error variance estimates from the FE and FD methods are numerically identical.
+        
+        \textbf{Answer:} Let
+        \begin{align*}
+            \hat{u}_{i 1}&=\ddot{y}_{i 1}-\ddot{\mathbf{x}}_{i 1} \hat{\boldsymbol{\beta}}_{F E} \\
+            \hat{u}_{i 2}&=\ddot{y}_{i 2}-\ddot{\mathbf{x}}_{i 2} \hat{\boldsymbol{\beta}}_{F E} \\
+            \hat{e}_i &= \Delta y_{i}-\Delta \mathbf{x}_{i} \hat{\bm{\beta}}_{FD}
+        \end{align*}
+        Then
+        \begin{align*}
+            \hat{u}_{i 1} &= -\frac{\Delta y_i}{2} - \left(-\frac{\Delta\mathbf{x}_i}{2}\right)\hat{\bm{\beta}}_{FE} = - \frac{ \Delta y_i - \Delta\mathbf{x}_i \hat{\bm{\beta}}_{FD} }{2} = -\frac{\hat{e}_i}{2} \\
+            \hat{u}_{i 2} &= \frac{\Delta y_i}{2} - \left(\frac{\Delta\mathbf{x}_i}{2}\right)\hat{\bm{\beta}}_{FE} = \frac{ \Delta y_i - \Delta\mathbf{x}_i \hat{\bm{\beta}}_{FD} }{2} = \frac{\hat{e}_i}{2}
+        \end{align*}
+        The relationship between the estimators of $\sigma^2_u$ and $\sigma^2_e$ will be
+        \begin{gather*}
+            \hat{\sigma}^2_u = \frac{ \displaystyle\sum_{i=1}^N \sum_{t=1}^T \hat{u}_{it}^2 }{ N(T-1) - K } = \frac{ \displaystyle\sum_{i=1}^N \frac{\hat{e}_{i}^2}{2} }{ N - K } = \frac{1}{2} \frac{ \displaystyle\sum_{i=1}^N \hat{e}_{i}^2 }{ N - K } = \frac{1}{2}\hat{\sigma}^2_e
+        \end{gather*}
+        Finally, we can obtain the relationship between $\displaystyle\widehat{\avar\left( \hat{\bm{\beta}}_{FE} \right)}$ and $\displaystyle\widehat{\avar\left( \hat{\bm{\beta}}_{FD} \right)}$:
+        \begin{align*}
+            \widehat{\operatorname{Avar}\left(\hat{\boldsymbol{\beta}}_{F E}\right)} &= \hat{\sigma}_{u}^{2}\left(\sum_{i=1}^{N} \sum_{t=1}^{T} \ddot{\mathbf{x}}_{i t}^{\prime} \ddot{\mathbf{x}}_{i t}\right)^{-1} = \frac{1}{2}\hat{\sigma}^2_e \left[\sum_{i=1}^{N}\left(\ddot{\mathbf{x}}_{i 1}^{\prime} \ddot{\mathbf{x}}_{i 1}+\ddot{\mathbf{x}}_{i 2}^{\prime} \ddot{\mathbf{x}}_{i 2}\right)\right]^{-1} \\
+            &= \frac{1}{2}\hat{\sigma}^2_e \left(\sum_{i=1}^{N} \frac{\Delta \mathbf{x}_{i}^{\prime} \Delta \mathbf{x}_{i}}{2} \right)^{-1} = \hat{\sigma}^2_e \left(\sum_{i=1}^{N} \Delta \mathbf{x}_{i}^{\prime} \Delta \mathbf{x}_{i} \right)^{-1} \\
+            &= \widehat{\operatorname{Avar}\left(\hat{\boldsymbol{\beta}}_{F D}\right)}
+        \end{align*}
+    \end{enumerate}
+    
+    
+    %problem boundary--------------------------------------------------------------------
+    \item[10.13] Consider the standard linear unobserved effects model 
+    \[ y_{i t}=\mathbf{x}_{i t} \boldsymbol{\beta}+c_{i}+u_{i t}, \quad t=1,2, \ldots, T \]
+    under the assumptions
+    \[ \mathrm{E}\left(u_{i t} \mid \mathbf{x}_{i}, \mathbf{h}_{i}, c_{i}\right)=0, \operatorname{Var}\left(u_{i t} \mid \mathbf{x}_{i}, \mathbf{h}_{i}, c_{i}\right)=\sigma_{u}^{2} h_{i t}, \quad t=1, \ldots, T \]
+    where $\mathbf{h}_{i}=\left(h_{i 1}, \ldots, h_{i T}\right) .$ In other words, the errors display heteroskedasticity that depends on $h_{i t}$. (In the leading case, $h_{i t}$ is a function of $\mathbf{x}_{i t}$.) Suppose you estimate $\boldsymbol{\beta}$ by minimizing the weighted sum of squared residuals
+    \[ \sum_{i=1}^{N} \sum_{t=1}^{T}\left(y_{i t}-a_{1} d 1_{i}-\cdots-a_{N} d N_{i}-\mathbf{x}_{i t} \mathbf{b}\right)^{2} / h_{i t} \]
+    with respect to the $a_{i}, i=1, \ldots, N$ and $\mathbf{b}$, where $d n_{i}=1$ if $i=n .$ (This would seem to be the natural analogue of the dummy variable regression, modified for known heteroskedasticity. We might call this a \textbf{fixed effects weighted least squares} estimator.) (\textcolor{red}{see p197, p307-311})
+    \begin{enumerate}
+        \item Show that the FEWLS estimator is generally consistent for fixed $T$ as $N \rightarrow \infty$. Do you need the variance function to be correctly specified in the sense that $\operatorname{Var}\left(u_{i t} \mid \mathbf{x}_{i}, \mathbf{h}_{i}, c_{i}\right)=\sigma_{u}^{2} h_{i t}, t=1, \ldots, T ?$ Explain.
+        
+        \textbf{Answer:} To obtain the $\displaystyle\hat{\bm{\beta}}_{FEWLS}$, we can use the following alternative steps: 
+        \begin{itemize}
+            \item In the weighted sum of squared residuals, we concentrate out the $a_i$ by finding $\hat{a}_i$ as a function of $\mathbf{x}_i, \mathbf{y}_i$ and $\mathbf{b}$.
+            \item substitute $\hat{a}_i$ back into the weighted sum of squared residuals.
+            \item minimize the weighted sum of squared residuals with respect to $\mathbf{b}$ only.
+        \end{itemize}
+        In the first step, rewrite the weighted sum of squared residuals as
+        \[ \mathrm{SSR} = \sum_{i=1}^{N} \sum_{t=1}^{T}\frac{\left(y_{i t}-a_i-\mathbf{x}_{i t} \mathbf{b}\right)^{2}}{h_{it}} \]
+        First order conditions with respect to $a_i$ will be
+        \begin{align*}
+            0 &= \frac{\partial\mathrm{SSR}}{\partial a_i} \iff \\
+            0 &= \sum_{t=1}^T \frac{y_{it}-a_i-\mathbf{x}_{it}\mathbf{b}}{h_{it}} \iff \\
+            \hat{a}_i &= \left( \sum_{t=1}^T \frac{1}{h_{it}} \right)^{-1} \left( \sum_{t=1}^T \frac{y_{it}}{h_{it}} \right) - \left( \sum_{t=1}^T \frac{1}{h_{it}} \right)^{-1} \left( \sum_{t=1}^T \frac{\mathbf{x}_{it}}{h_{it}} \right) \mathbf{b} \\
+            &= w_i \left( \sum_{t=1}^T \frac{y_{it}}{h_{it}} \right) - w_i \left( \sum_{t=1}^T \frac{\mathbf{x}_{it}}{h_{it}} \right) \mathbf{b} \\
+            &= \bar{y}_i^w - \bar{\mathbf{x}}_i^w \mathbf{b}
+        \end{align*}
+        where
+        \[ w_i = \left( \sum_{t=1}^T \frac{1}{h_{it}} \right)^{-1}, \bar{y}_i^w = w_i \left( \sum_{t=1}^T \frac{y_{it}}{h_{it}} \right), \bar{\mathbf{x}}_i^w = w_i \left( \sum_{t=1}^T \frac{\mathbf{x}_{it}}{h_{it}} \right) \]
+        
+        In the second step, substituting $\hat{a}_i$ back into the weighted sum of squared residuals, we have
+        \begin{gather}
+            \mathrm{SSR} = \sum_{i=1}^{N} \sum_{t=1}^{T} \frac{\left[ (y_{it}-\bar{y}_i^w) - (\mathbf{x}_{it}-\bar{\mathbf{x}}_i^w)\mathbf{b} \right]^2}{h_{it}} = \sum_{i=1}^{N} \sum_{t=1}^{T} (\tilde{y}_{it} - \tilde{\mathbf{x}}_{it} \mathbf{b})^2 \label{eq:10.3-1}
+        \end{gather}
+        where
+        \[ \tilde{y}_{it} = \frac{y_{it}-\bar{y}_i^w}{\sqrt{h_{it}}}, \tilde{\mathbf{x}}_{it} = \frac{\mathbf{x}_{it}-\bar{\mathbf{x}}_i^w}{\sqrt{h_{it}}} \]
+        In the third step, by minimizing the SSR in the equation \eqref{eq:10.3-1} with respect to $\mathbf{b}$, we can get the fixed effects weighted least squares estimators of $\bm{\beta}$: 
+        \begin{gather}
+            \hat{\bm{\beta}}_{FEWLS} = \left(\sum_{i=1}^{N} \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right)^{-1}\left(\sum_{i=1}^{N} \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{y}_{i t}\right) \label{eq:10.3-fewls1}
+        \end{gather}
+        From the population eqation
+        \begin{gather}
+            y_{i t}=\mathbf{x}_{i t} \boldsymbol{\beta}+c_{i}+u_{i t} \label{eq:10.3-2}
+        \end{gather}
+        we can easily deduce
+        \begin{gather}
+            \bar{y}_i^w = \bar{\mathbf{x}}_i^w \bm{\beta} + c_i + \bar{u}_i^w \label{eq:10.3-3}
+        \end{gather}
+        where
+        \[ \bar{u}_i^w = w_i\left( \sum_{t=1}^T \frac{u_{it}}{h_{it}} \right) \]
+        Equations \eqref{eq:10.3-2} - \eqref{eq:10.3-3} and divide the former by $\sqrt{h_{it}}$,
+        \begin{gather}
+            \frac{y_{it}-\bar{y}_i^w}{\sqrt{h_{it}}} = \frac{\mathbf{x}_{it}-\bar{\mathbf{x}}_i^w}{\sqrt{h_{it}}} \bm{\beta} + \frac{u_{it}-\bar{u}_i^w}{\sqrt{h_{it}}} \implies \tilde{y}_{it} = \tilde{\mathbf{x}}_{it} \bm{\beta} + \tilde{u}_{it} \label{eq:10.3-4}
+        \end{gather}
+        where
+        \[ \tilde{u}_{it} = \frac{u_{it}-\bar{u}_i^w}{\sqrt{h_{it}}} \]
+        Substitute the equation \eqref{eq:10.3-4} into the equation \eqref{eq:10.3-fewls1},
+        \begin{gather}
+            \hat{\bm{\beta}}_{FEWLS} = \bm{\beta} + \left(\sum_{i=1}^{N} \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right)^{-1}\left(\sum_{i=1}^{N} \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{u}_{i t}\right) \label{eq:10.3-fewls2}
+        \end{gather}
+        Due to
+        \begin{align*}
+            \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{u}_{i t} &= \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \frac{u_{it}-\bar{u}_i^w}{\sqrt{h_{it}}} = \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{it}}{\sqrt{h_{it}}} - \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} \bar{u}_i^w}{\sqrt{h_{it}}} \\
+            &= \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{it}}{\sqrt{h_{it}}} - \bar{u}_i^w \sum_{t=1}^{T} \left(\frac{\mathbf{x}_{it}-\bar{\mathbf{x}}_i^w}{\sqrt{h_{it}}}\right)^\prime \frac{1}{\sqrt{h_{it}}} \\
+            &= \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{it}}{\sqrt{h_{it}}} - \bar{u}_i^w \left[ \sum_{t=1}^{T} \frac{\mathbf{x}_{it}}{h_{it}} -  \sum_{t=1}^{T} \frac{w_{i}}{h_{it}} \left(\sum_{t=1}^{T} \frac{\mathbf{x}_{i t}}{h_{it}}\right) \right]^\prime \\
+            &= \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{it}}{\sqrt{h_{it}}} - \bar{u}_i^w \left[ \sum_{t=1}^{T} \frac{\mathbf{x}_{it}}{h_{it}} -  \left(\sum_{t=1}^{T} \frac{\mathbf{x}_{i t}}{h_{it}}\right) w_i \left(\sum_{t=1}^{T} \frac{1}{h_{it}}\right) \right]^\prime \\
+            &= \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{it}}{\sqrt{h_{it}}} - \bar{u}_i^w \left[ \sum_{t=1}^{T} \frac{\mathbf{x}_{it}}{h_{it}} -  \sum_{t=1}^{T} \frac{\mathbf{x}_{it}}{h_{it}} \right]^\prime \\
+            &= \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{it}}{\sqrt{h_{it}}}
+        \end{align*}
+        the equation \eqref{eq:10.3-fewls2} can be rewritten as
+        \begin{align}
+            \hat{\bm{\beta}}_{FEWLS} &= \bm{\beta} + \left(\sum_{i=1}^{N} \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right)^{-1}\left(\sum_{i=1}^{N} \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{it}}{\sqrt{h_{it}}} \right) \notag \\
+            &= \bm{\beta} + \left(N^{-1}\sum_{i=1}^{N} \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right)^{-1} \left(N^{-1}\sum_{i=1}^{N} \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{it}}{\sqrt{h_{it}}} \right) \label{eq:10.3-fewls3}
+        \end{align}
+        It is easy to know that $\hat{\bm{\beta}}_{FEWLS} \xrightarrow{P} \bm{\beta}$ with conditions
+        \[ \mathrm{rank} \sum_{t=1}^{T} \mathrm{E}\left(\tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right) = k\quad \& \quad\mathrm{E}\left(u_{i t} \mid \mathbf{x}_{i}, \mathbf{h}_{i}, c_{i}\right)=0 \]
+        and the variance assumption
+        \[ \operatorname{Var}\left(u_{i t} \mid \mathbf{x}_{i}, \mathbf{h}_{i}, c_{i}\right) = \sigma_u^2 h_{it} \]
+        will not affect the consistency of $\hat{\bm{\beta}}_{FEWLS}$.
+        
+        \item Suppose the variance function is correctly specified and $\operatorname{Cov}\left(u_{i t}, u_{i s} \mid \mathbf{x}_{i}, \mathbf{h}_{i}, c_{i}\right)=0$, $t \neq s .$ Find the asymptotic variance of $\sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E W L S}-\boldsymbol{\beta}\right)$.
+        
+        \textbf{Answer:} Rewriting the equation \eqref{eq:10.3-fewls3},
+        \begin{gather}
+            \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E W L S}-\boldsymbol{\beta}\right)=\left(N^{-1} \sum_{i=1}^{N} \sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right)\left(N^{-1 / 2} \sum_{i=1}^{N} \sum_{t=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{i t}}{\sqrt{h_{i t}}} \right)
+        \end{gather}
+        we know that $\hat{\bm{\beta}}_{FEWLS}$ is $\sqrt{N}$-asymptotically normal under mild assumptions. The asymptotic variance will be
+        \[ \operatorname{Avar} \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E W L S}-\boldsymbol{\beta}\right)=\mathbf{A}^{-1} \mathbf{B} \mathbf{A}^{-1} \]
+        where
+        \begin{align*}
+            \mathbf{A} &= \sum_{t=1}^{T} \mathrm{E}\left(\tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right) \\
+            \mathbf{B} &= \mathrm{E}\left[\left(\sum_{i=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{i t}}{\sqrt{h_{i t}}} \right)\left(\sum_{i=1}^{T} \frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{i t}}{\sqrt{h_{i t}}}\right)^{\prime}\right]
+        \end{align*}
+        Using the assumption $\operatorname{Var}\left(u_{i t} \mid \mathbf{x}_{i}, \mathbf{h}_{i}, c_{i}\right)=\sigma_{u}^{2} h_{i t}$ and $\operatorname{Cov}\left(u_{i t}, u_{i s} \mid \mathbf{x}_{i}, \mathbf{h}_{i}, c_{i}\right)=0$, we can simplify $\mathbf{B}$ as follow:
+        \[ \mathbf{B} = \mathrm{E} \left[ \sum_{t=1}^T \left(\frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{i t}}{\sqrt{h_{i t}}}\right) \left(\frac{\tilde{\mathbf{x}}_{i t}^{\prime} u_{i t}}{\sqrt{h_{i t}}}\right)^{\prime} \right] = \sigma_{u}^{2} \sum_{t=1}^T \mathrm{E}\left(\frac{\tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}}{h_{i t}}\right) \]
+        so the asymptotic variance for $\hat{\boldsymbol{\beta}}_{FEWLS}$ can be rewrite as
+        \[ \operatorname{Avar} \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E W L S}-\boldsymbol{\beta}\right) = \sigma_{u}^{2} \left[ \sum_{t=1}^{T} \mathrm{E}\left(\tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right) \right]^{-1} \left[ \sum_{t=1}^T \mathrm{E}\left(\frac{\tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}}{h_{i t}}\right) \right] \left[ \sum_{t=1}^{T} \mathrm{E}\left(\tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}\right) \right]^{-1} \]
+        
+        \item Under the assumptions of part b, how would you estimate $\sigma_{u}^{2}$ and $\operatorname{Avar}\sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E W L S}-\boldsymbol{\beta}\right)$?
+        
+        \textbf{Answer:} For the expectation of $\tilde{u}_{it}^2$, we have
+        \begin{align*}
+            \mathrm{E}\left( \tilde{u}_{it}^2 \right) &= \mathrm{E}\left(  \frac{u_{it}-\bar{u}_i^w}{\sqrt{h_{it}}} \right)^2 = \mathrm{E}\left( \frac{u_{it}^2}{h_{it}} \right) - 2 \mathrm{E}\left(\frac{u_{it}\bar{u}_i^w}{h_{it}}\right) + \left[\frac{(\bar{u}_i^w)^2}{h_{it}}\right] \\
+            &= \sigma_u^2 - 2\sigma_u^2 \mathrm{E}\left( \frac{w_i}{h_{it}} \right) + \sigma_u^2 \mathrm{E}\left( \frac{w_i}{h_{it}} \right) = \sigma_u^2 - \sigma_u^2 \mathrm{E}\left( \frac{w_i}{h_{it}} \right)
+        \end{align*}
+        That implies that
+        \[ \sum_{t=1}^T \mathrm{E}\left( \tilde{u}_{it}^2 \right) = \sigma_u^2(T-1) \]
+        Therefore, a consistent estimator of $\sigma_u^2$ is
+        \[ \hat{\sigma}_u^2 = \frac{ \displaystyle\sum_{i=1}^N\sum_{t=1}^T \hat{\tilde{u}}_{it}^2 }{N(T-1) - K} \]
+        where the subtraction of $K$ in the denominator is a degrees-of-freedom adjustment and the $\hat{\tilde{u}}_{it}$ is the residual from the pooled OLS regression
+        \[ \tilde{y}_{it} \text{ on } \tilde{\mathbf{x}}_{it},\quad t = 1,2,\cdots,T, i = 1,2,\cdots,N \]
+        The estimator of $\operatorname{Avar} \left( \hat{\bm{\beta}}_{FEWLS} \right)$ is then
+        \[ \widehat{\operatorname{Avar} \left( \hat{\bm{\beta}}_{FEWLS} \right)} = \hat{\sigma}_u^2 \left( \sum_{i=1}^N\sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t} \right)^{-1} \left( \sum_{i=1}^N\sum_{t=1}^T \frac{\tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t}}{h_{i t}} \right) \left( \sum_{i=1}^N\sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t} \right)^{-1} \]
+        
+        \item If the variance function is misspecified, or there is serial correlation in $u_{i t}$, or both, how would you estimate $\displaystyle\operatorname{Avar} \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E W L S}-\boldsymbol{\beta}\right)$ ?
+        
+        \textbf{Answer:} We can calculate the robust variance matrix estimator to solve the problem:
+        \[ \widehat{\operatorname{Avar} \left( \hat{\bm{\beta}}_{FEWLS} \right)} = \left( \sum_{i=1}^N\sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t} \right)^{-1} \left( \sum_{i=1}^N\sum_{t=1}^T\sum_{s=1}^T \frac{ \hat{\tilde{u}}_{it} \hat{\tilde{u}}_{is} \tilde{\mathbf{x}}_{it}^{\prime} \tilde{\mathbf{x}}_{is} }{ \sqrt{h_{it} h_{is}} } \right) \left( \sum_{i=1}^N\sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t} \right)^{-1} \]
+        That is, 
+        \[ \widehat{\operatorname{Avar}\sqrt{N}\left(\hat{\boldsymbol{\beta}}_{FEWLS}-\boldsymbol{\beta}\right)} = \left( \frac{1}{N} \sum_{i=1}^N\sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t} \right)^{-1} \left( \frac{1}{N} \sum_{i=1}^N\sum_{t=1}^T\sum_{s=1}^T \frac{ \hat{\tilde{u}}_{it} \hat{\tilde{u}}_{is} \tilde{\mathbf{x}}_{it}^{\prime} \tilde{\mathbf{x}}_{is} }{ \sqrt{h_{it} h_{is}} } \right) \left( \frac{1}{N} \sum_{i=1}^N\sum_{t=1}^{T} \tilde{\mathbf{x}}_{i t}^{\prime} \tilde{\mathbf{x}}_{i t} \right)^{-1} \]
+    \end{enumerate}
+    
+    
+    %problem boundary--------------------------------------------------------------------
+    \item[10.17] Consider a standard unobserved effects model but where we explicitly separate out aggregate time effects, say $\mathbf{d}_{t}$, a $1 \times R$ vector, where $R \leq T-1$. (These are usually a full set of time period dummies, but they could be other aggregate time variables, such as specific functions of time.) Therefore, the model is
+    \[ y_{i t}=\alpha+\mathbf{d}_{t} \boldsymbol{\eta}+\mathbf{w}_{i t} \boldsymbol{\delta}+c_{i}+u_{i t}, \quad t=1, \ldots, T \]
+    where $\mathbf{w}_{i t}$ is the $1 \times M$ vector of explanatory variables that vary across $i$ and $t$. Because the $\mathbf{d}_{t}$ do not change across $i$, we take them to be nonrandom. Because we have included an intercept in the model, we can assume that $E\left(c_{i}\right)=0 .$ Let 
+    \[ \lambda = 1 - \left( \frac{1}{\displaystyle 1 + T \sigma_c^2 / \sigma_u^2} \right)^{1/2} \]
+    be the usual quasi-time-demeaning parameter for $\mathrm{RE}$ estimation. In what follows, we take $\lambda$ as known because estimating it does not affect the asymptotic distribution results.
+    
+    \begin{enumerate}
+        \item Show that we can write the quasi-time-demeaned equation for $\mathrm{RE}$ estimation as
+        \[ y_{it}-\lambda \bar{y}_{i}=\mu+\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right) \boldsymbol{\eta}+\left(\mathbf{w}_{i t}-\lambda \overline{\mathbf{w}}_{i}\right) \boldsymbol{\delta}+\left(v_{i t}-\lambda \bar{v}_{i}\right) \]
+        where $\mu=(1-\lambda) \alpha+(1-\lambda) \bar{\mathbf{d}} \boldsymbol{\eta}, v_{i t}=c_{i}+u_{i t}$, and $\bar{\mathbf{d}}=T^{-1} \sum_{t=1}^{T} \mathbf{d}_{t}$ is nonrandom.
+        
+        \textbf{Answer:} Recall the population model
+        \begin{gather}
+            y_{it}=\alpha+\mathbf{d}_{t} \boldsymbol{\eta}+\mathbf{w}_{i t} \boldsymbol{\delta}+c_{i}+u_{i t} \label{eq:10.17-1}
+        \end{gather}
+        Then
+        \begin{gather}
+            \bar{y}_{i}=\alpha+\bar{\mathbf{d}} \boldsymbol{\eta}+\overline{\mathbf{w}}_{i} \boldsymbol{\delta}+c_{i}+\bar{u}_{i} \label{eq:10.17-2}
+        \end{gather}
+        Equations $\eqref{eq:10.17-1}-\lambda\eqref{eq:10.17-2}$,
+        \begin{align}
+            y_{it}-\lambda \bar{y}_{i} &= (1-\lambda)\alpha + (\mathbf{d}_t - \lambda\bar{\mathbf{d}})\bm{\eta} + (\mathbf{w}_{it} - \lambda\overline{\mathbf{w}}_i) \bm{\delta} + (v_{it} - \lambda\bar{v}_i) \notag \\
+            &= (1-\lambda)\alpha + (\mathbf{d}_t - \lambda\bar{\mathbf{d}})\bm{\eta} + \bar{\mathbf{d}}\bm{\eta} - \bar{\mathbf{d}}\bm{\eta} + (\mathbf{w}_{it} - \lambda\overline{\mathbf{w}}_i) \bm{\delta} + (v_{it} - \lambda\bar{v}_i) \notag \\
+            &= (1-\lambda)\alpha + (1-\lambda)\bar{\mathbf{d}}\bm{\eta} + (\mathbf{d}_t - \bar{\mathbf{d}})\bm{\eta} + (\mathbf{w}_{it} - \lambda\overline{\mathbf{w}}_i) \bm{\delta} + (v_{it} - \lambda\bar{v}_i) \notag \\
+            &= \mu+\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right) \boldsymbol{\eta}+\left(\mathbf{w}_{i t}-\lambda \overline{\mathbf{w}}_{i}\right) \boldsymbol{\delta}+\left(v_{i t}-\lambda \bar{v}_{i}\right) \label{eq:10.17-3}
+        \end{align}
+        where $\mu=(1-\lambda) \alpha+(1-\lambda) \bar{\mathbf{d}} \boldsymbol{\eta}, v_{i t}=c_{i}+u_{i t}$.
+        
+        \item To simplify the algebra without changing the substance of the findings, assume that $\mu=0$ and that we exclude an intercept in estimating the quasi-time-demeaned equation. Write $\mathbf{g}_{i t}=\left(\mathbf{d}_{t}-\bar{\mathbf{d}}, \mathbf{w}_{i t}-\lambda \overline{\mathbf{w}}_{i}\right)$ and $\boldsymbol{\beta}=\left(\boldsymbol{\eta}^{\prime}, \boldsymbol{\delta}^{\prime}\right)^{\prime}$. We will study the asymptotic distribution of the $\mathrm{RE}$ estimator by using the pooled OLS estimator from $y_{i t}-\lambda \bar{y}_{i}$ on $\mathbf{g}_{i t}, t=1, \ldots, T ; i=1, \ldots, N .$ Show that under Assumptions RE.1 and RE.2,
+        \[ \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{R E}-\boldsymbol{\beta}\right)=\mathbf{A}_{1}^{-1} N^{-1 / 2} \sum_{i=1}^{N} \sum_{t=1}^{T} \mathbf{g}_{i t}^{\prime}\left(v_{i t}-\lambda \bar{v}_{i}\right)+o_{p}(1) \]
+        where $\displaystyle\mathbf{A}_{1} \equiv \sum_{t=1}^{T} \mathrm{E}\left(\mathbf{g}_{i t}^{\prime} \mathbf{g}_{i t}\right) .$ Further, verify that for any $i$,
+        \[ \sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right)\left(v_{i t}-\lambda \bar{v}_{i}\right)=\sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right) u_{i t} \]
+        
+        \textbf{Answer:} Recall the Assumptions RE.1, RE.2 and RE.3:
+        \begin{itemize}
+            \item Assumption RE.1: $\mathrm{E}(u_{it} \mid \mathbf{x}_i,c_i) = 0\ \&\ \mathrm{E}(c_i \mid \mathbf{x}_i) = \mathrm{E}(c_i) = 0$
+            \item Assumption RE.2: $\operatorname{rank} \mathrm{E}\left( \mathbf{x}_i^\prime \Omega^{-1} \mathbf{x}_i \right) = k$
+            \item Assumption RE.3: $\mathrm{E}(u_i u_i^\prime \mid \mathbf{x}_i,c_i) = \sigma_u^2 \mathbf{I}_T \ \&\ \mathrm{E}(c_i^2 \mid \mathbf{x}_i) = \sigma_c^2$
+        \end{itemize}
+        Rewrite the equation \eqref{eq:10.17-3} with the conditions in this question: 
+        \[ y_{it}-\lambda \bar{y}_{i}= \mathbf{g}_{it}\bm{\beta} +\left(v_{i t}-\lambda \bar{v}_{i}\right) \]
+        Under Assumption RE.1 and RE.2, we can obtain $\hat{\bm{\beta}}_{RE}$ with the pooled regression above:
+        \begin{align*}
+            \hat{\bm{\beta}}_{RE} &= \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime \mathbf{g}_{it} \right)^{-1} \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime (y_{it} - \lambda\bar{y}_i) \right) \\
+            &= \bm{\beta} + \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime \mathbf{g}_{it} \right)^{-1} \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime (v_{i t}-\lambda \bar{v}_{i}) \right)
+        \end{align*}
+        That is,
+        \begin{gather}
+            \sqrt{N}\left( \hat{\bm{\beta}}_{RE} - \bm{\beta} \right) = \left( \frac{1}{N} \sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime \mathbf{g}_{it} \right)^{-1} \left( \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime (v_{i t}-\lambda \bar{v}_{i}) \right) \label{eq:10.17-4}
+        \end{gather}
+        It is to know that
+        \begin{gather*}
+            \frac{1}{N} \sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime \mathbf{g}_{it} \xlongrightarrow{P} \mathbf{A}_1 \\
+            \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime (v_{i t}-\lambda \bar{v}_{i}) \xlongrightarrow{d} N(0,\mathbf{B}_1)
+        \end{gather*}
+        where
+        \[ \mathbf{B}_1 = \mathrm{E}\left[ \left( \sum_{t=1}^T \mathbf{g}_{it}^\prime (v_{i t}-\lambda \bar{v}_{i}) \right)  \left( \sum_{t=1}^T \mathbf{g}_{it}^\prime (v_{i t}-\lambda \bar{v}_{i}) \right)^\prime \right] \]
+        so
+        \begin{gather*}
+            \left( \frac{1}{N} \sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime \mathbf{g}_{it} \right)^{-1} = \mathbf{A}_1^{-1} + o_p(1) \\
+            \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime (v_{i t}-\lambda \bar{v}_{i}) = O_p(1)
+        \end{gather*}
+        Combining the equations above and the common equality $o_p(1)\cdot O_p(1) = o_p(1)$, the equation \eqref{eq:10.17-4} can be rewritten as
+        \[ \sqrt{N}\left( \hat{\bm{\beta}}_{RE} - \bm{\beta} \right) = \mathbf{A}_1^{-1} \left( \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime (v_{i t}-\lambda \bar{v}_{i}) \right) + o_p(1) \]
+        Further, for any $i$, 
+        \begin{align*}
+            \sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right)\left(v_{i t}-\lambda \bar{v}_{i}\right) &= \sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right)\left[ (1-\lambda)c_i + (u_{it} - \lambda\bar{u}_i) \right] \\
+            &= \sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right)(1-\lambda)c_i + \sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right) u_{it} - \sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right)\lambda\bar{u}_i \\
+            &= 0 + \sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right) u_{it} - 0 \\
+            &= \sum_{t=1}^{T}\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right) u_{it}
+        \end{align*}
+        
+        \item Show that under FE.1 and FE.2,
+        \[ \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E}-\boldsymbol{\beta}\right)=\mathbf{A}_{2}^{-1} N^{-1 / 2} \sum_{i=1}^{N} \sum_{t=1}^{T} \mathbf{h}_{i t}^{\prime} u_{i t}+o_{p}(1) \]
+        where $\mathbf{h}_{i t} = \left(\mathbf{d}_{t}-\bar{\mathbf{d}}, \mathbf{w}_{i t}-\overline{\mathbf{w}}_{i}\right)$ and $\displaystyle\mathbf{A}_{2} \equiv \sum_{t=1}^{T} \mathrm{E}\left(\mathbf{h}_{i t}^{\prime} \mathbf{h}_{i t}\right)$.
+        
+        \textbf{Answer:} Recall the Assumption FE.1 and FE.2:
+        \begin{itemize}
+            \item Assumption FE.1: $\mathrm{E}(u_{it} \mid \mathbf{x}_i,c_i) = 0$
+            \item Assumption FE.2: $\operatorname{rank} \sum_{t=1}^T \mathrm{E} \left( \ddot{\mathbf{x}}_{it}^\prime \ddot{\mathbf{x}}_{it} \right) = k$
+        \end{itemize}
+        Equations $\eqref{eq:10.17-1}-\eqref{eq:10.17-2}$,
+        \begin{align*}
+            y_{it} - \bar{y}_i &= (\mathbf{d}_t - \bar{\mathbf{d}})\bm{\eta} + (\mathbf{w}_{it} - \bar{\mathbf{w}}_i)\bm{\delta} + (u_{it} - \bar{u}_i) \\
+            &= \mathbf{h}_{it}\bm{\beta} + (u_{it} - \bar{u}_i)
+        \end{align*}
+        Under Assumption FE.1 and FE.2, we can obtain $\hat{\bm{\beta}}_{FE}$ with the pooled regression above:
+        \begin{align*}
+            \hat{\bm{\beta}}_{FE} &= \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime \mathbf{h}_{it} \right)^{-1} \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime (y_{it} - \bar{y}_i) \right) \\
+            &= \bm{\beta} + \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime \mathbf{h}_{it} \right)^{-1} \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime (u_{it}- \bar{u}_{i}) \right) \\
+            &= \bm{\beta} + \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime \mathbf{h}_{it} \right)^{-1} \left( \sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime u_{it} \right)
+        \end{align*}
+        That is,
+        \begin{gather*}
+            \sqrt{N}\left( \hat{\bm{\beta}}_{FE} - \bm{\beta} \right) = \left( \frac{1}{N} \sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime \mathbf{h}_{it} \right)^{-1} \left( \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime u_{i t} \right) 
+        \end{gather*}
+        Same as part b, we can deduce that 
+        \[ \sqrt{N}\left( \hat{\bm{\beta}}_{FE} - \bm{\beta} \right) = \mathbf{A}_2^{-1} \left( \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime u_{it} \right) + o_p(1) \]
+        where $\displaystyle\mathbf{A}_{2} \equiv \sum_{t=1}^{T} \mathrm{E}\left(\mathbf{h}_{i t}^{\prime} \mathbf{h}_{i t}\right)$.
+        
+        \item Under RE.1, FE.1, and FE.2, show that $\mathbf{A}_{1} \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{R E}-\boldsymbol{\beta}\right)-\mathbf{A}_{2} \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E}-\boldsymbol{\beta}\right)$ has an asymptotic variance matrix of rank $M$ rather than $R+M$.
+        
+        \textbf{Answer:} From part b, we can write
+        \[ \mathbf{A}_1\sqrt{N}\left( \hat{\bm{\beta}}_{RE} - \bm{\beta} \right) = \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{g}_{it}^\prime (v_{i t}-\lambda \bar{v}_{i}) + o_p(1) = \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{r}_{it} + o_p(1) \]
+        where 
+        \[ \mathbf{r}_{i t}=\left[\left(\mathbf{d}_{t}-\bar{\mathbf{d}}\right) u_{i t},\left(\mathbf{w}_{i t}-\lambda \overline{\mathbf{w}}_{i}\right)\left(v_{i t}-\lambda \bar{v}_{i}\right)\right]^{\prime} \]
+        From part c, we can write
+        \[ \mathbf{A}_2\sqrt{N}\left( \hat{\bm{\beta}}_{FE} - \bm{\beta} \right) = \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{h}_{it}^\prime u_{it} + o_p(1) = \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \mathbf{s}_{it} + o_p(1) \]
+        where
+        \[ \mathbf{s}_{i t}=\left[\left(\mathbf{d}_{t}-\overline{\mathbf{d}}\right) u_{i t},\left(\mathbf{w}_{i t}-\overline{\mathbf{w}}_{i}\right) u_{i t}\right]^{\prime} \]
+        Therefore,
+        \begin{align*}
+            \mathbf{A}_1\sqrt{N}\left( \hat{\bm{\beta}}_{RE} - \bm{\beta} \right) - \mathbf{A}_2\sqrt{N}\left( \hat{\bm{\beta}}_{FE} - \bm{\beta} \right) &= \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T (\mathbf{r}_{it} - \mathbf{s}_{it}) + o_p(1) \\
+            &= \frac{1}{\sqrt{N}}\sum_{i=1}^N \sum_{t=1}^T \begin{bmatrix} \mathbf{0} \\ \left(\mathbf{w}_{i t}-\lambda \overline{\mathbf{w}}_{i}\right) e_{it} - \left(\mathbf{w}_{i t}-\overline{\mathbf{w}}_{i}\right) u_{it} \end{bmatrix} + o_p(1)
+        \end{align*}
+        where $e_{it} = v_{i t}-\lambda \bar{v}_{i}$. From the equation above, it is clearly that $\mathbf{A}_{1} \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{R E}-\boldsymbol{\beta}\right)-\mathbf{A}_{2} \sqrt{N}\left(\hat{\boldsymbol{\beta}}_{F E}-\boldsymbol{\beta}\right)$ has an asymptotic variance matrix of rank $M$ rather than $R+M$.
+        
+        \item What implications does part d have for a Hausman test that compares $\mathrm{FE}$ and $\mathrm{RE}$ when the model contains aggregate time variables of any sort? Does it matter whether Assumption RE.3 holds under the null?
+        
+        \textbf{Answer:} From the part d, if the model contains aggregate time variables of any sort, we know that there will be R linear relationships between the estimated coefficients of the aggregate time variables in the RE model and the one in the FE model, so the degree-of-freedom should be adjusted by subtracting $R$ from $M+R$ for the Hausman test that compares $\hat{\bm{\beta}}_{RE}$ and $\hat{\bm{\beta}}_{FE}$. That is, the degree-of-freedom for the Hausman test will be $M$ rather than $M+R$. Whether Assumption RE.3 holds does not affect the result above.
+    \end{enumerate}
+\end{enumerate}
