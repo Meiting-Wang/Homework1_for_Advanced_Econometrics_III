@@ -1,0 +1,47 @@
+\begin{enumerate}
+    %problem boundary--------------------------------------------------------------------
+    \item[21.1] Consider the difference-in-means estimator, $\bar{d}=\bar{y}_{1}-\bar{y}_{0}$, where $\bar{y}_{g}$ is the sample average of the $y_{i}$ with $w_{i}=g, g=0,1$. (\textcolor{red}{see lecture note p6-7})
+    \begin{enumerate}
+        \item Show that, as an estimator of $\tau_{\text {att }}$, the bias in $\bar{y}_{1}-\bar{y}_{0}$ is $\mathrm{E}\left(y_{0} \mid w=1\right)-$ $\mathrm{E}\left(y_{0} \mid w=0\right)$.
+        
+        \textbf{Answer:} It is clearly that $\mathrm{E}(\bar{y}_1) = \mathrm{E}(y \mid w=1), \mathrm{E}(\bar{y}_0) = \mathrm{E}(y \mid w=0)$. Then
+        \begin{align*}
+            \mathrm{E}(\bar{y}_{1}-\bar{y}_{0}) &= \mathrm{E}(y \mid w=1) - \mathrm{E}(y \mid w=0) \\
+            &= \mathrm{E}(y_1 \mid w=1) - \mathrm{E}(y_0 \mid w=0) \\
+            &= \mathrm{E}(y_1 \mid w=1) - \mathrm{E}(y_0 \mid w=1) + \mathrm{E}(y_0 \mid w=1) - \mathrm{E}(y_0 \mid w=0) \\
+            &= \tau_{att} + \mathrm{E}(y_0 \mid w=1) - \mathrm{E}(y_0 \mid w=0)
+        \end{align*}
+        From the above equation, we know that as an estimator of $\tau_{att}$, the bias in $\bar{y}_{1}-\bar{y}_{0}$ is $\mathrm{E}\left(y_{0} \mid w=1\right)-$ $\mathrm{E}\left(y_{0} \mid w=0\right)$.
+        
+        \item Let $y_{0}$ be the earnings someone would earn in the absence of job training, and let $w=1$ denote the job training indicator. Explain the meaning of $\mathrm{E}\left(y_{0} \mid w=1\right)<$ $\mathrm{E}\left(y_{0} \mid w=0\right)$. Intuitively, does it make sense that $\mathrm{E}(\bar{d})<\tau_{a t t}$?
+        
+        \textbf{Answer:} The $\mathrm{E}\left(y_{0} \mid w=1\right)<$ $\mathrm{E}\left(y_{0} \mid w=0\right)$ means that those who participate in the program would have lower average earnings without training than those who choose not to participate. This is a form of self-selection, and, on average, leads to an underestimate of the impact of the program.
+    \end{enumerate}
+    
+    
+    %problem boundary--------------------------------------------------------------------
+    \item[21.2] Explain how you would estimate $\tau_{ate, \mathcal{R}}=\mathrm{E}\left(y_{1}-y_{0} \mid \mathbf{x} \in \mathcal{R}\right)$ using propensity score weighting under Assumption $\text{ATE.}1^\prime$. (\textcolor{red}{see lecture note p8})
+    
+    \textbf{Answer:} Recall the Assumption $\text{ATE.}1^\prime$ (Ignorability in Mean):
+    \[ \mathrm{E}(y_0 \mid \mathbf{x},w) = \mathrm{E}(y_0 \mid \mathbf{x}), \mathrm{E}(y_1 \mid \mathbf{x},w) = \mathrm{E}(y_1 \mid \mathbf{x}) \]
+    Let
+    \[ k = \frac{[w-p(\mathbf{x})] y}{p(\mathbf{x})[1-p(\mathbf{x})]} \]
+    Then, under the Assumption $\text{ATE.}1^\prime$, we know that
+    \[ \mathrm{E}(k \mid \mathbf{x})=\mu_{1}(\mathbf{x})-\mu_{0}(\mathbf{x})=\tau_{ate}(\mathbf{x}) \]
+    Let $d = 1[\mathbf{x}\in\mathcal{R}]$, and by the law of iterated expectation and the fact that $d$ is a function of $\mathbf{x}$,
+    \begin{align*}
+        \mathrm{E}\left(y_{1}-y_{0} \mid d\right) &= \mathrm{E}\left[\mathrm{E}\left(y_{1}-y_{0} \mid \mathbf{x}, d\right) \mid d\right]=\mathrm{E}\left[\mathrm{E}\left(y_{1}-y_{0} \mid \mathbf{x}\right) \mid d\right] \\
+        &= \mathrm{E}\left[\tau_{ate}(\mathbf{x}) \mid d\right]=\mathrm{E}[\mathrm{E}(k \mid \mathbf{x}) \mid d] \\
+        &= \mathrm{E}[\mathrm{E}(k \mid d,\mathbf{x}) \mid d] = \mathrm{E}(k \mid d)
+    \end{align*}
+    Using the equation above,
+    \[ \tau_{ate, \mathcal{R}}=\mathrm{E}\left(y_{1}-y_{0} \mid \mathbf{x} \in \mathcal{R}\right) = \mathrm{E}\left(y_{1}-y_{0} \mid d=1\right) = \mathrm{E}(k \mid d=1) \]
+    Because
+    \[ \mathrm{E}(d \cdot k)= \mathrm{E} \left[\mathrm{E}(d \cdot k \mid d)\right] = \mathrm{E}\left[d \mathrm{E}(k \mid d)\right] =p(d=1) \mathrm{E}(k \mid d=1) \]
+    so
+    \[ \tau_{ate, \mathcal{R}} = \mathrm{E}(k \mid d=1) = \frac{\mathrm{E}(d \cdot k)}{p(d=1)} = \frac{\mathrm{E}(d \cdot k)}{p(\mathbf{x}\in\mathcal{R})} \]
+    If we know the propensity score, a consistent estimator of $\mathrm{E}(d \cdot k)$ would be
+    \[ \widehat{\mathrm{E}(d \cdot k)} = \frac{1}{N} \sum_{i=1}^{N} 1\left[\mathbf{x}_{i} \in \mathcal{R}\right] k_{i}, \text{ where } k_i = \frac{[w_i-p(\mathbf{x}_i)] y_i}{p(\mathbf{x}_i)[1-p(\mathbf{x}_i)]} \]
+    and a consistent estimator of $p(\mathbf{x} \in \mathcal{R})$ is clearly the fraction of observations with $\mathbf{x}_{i} \in \mathcal{R}$, say $N_{\mathcal{R}}/N$. Finally, from the Continuous Mapping Theorem, a consistent estimator of $\tau_{ate, \mathcal{R}}$ will be
+    \[ \widehat{\tau_{ate, \mathcal{R}}} = \frac{ \displaystyle\frac{1}{N} \sum_{i=1}^{N} 1\left[\mathbf{x}_{i} \in \mathcal{R}\right] k_{i}}{\displaystyle\frac{N_{\mathcal{R}}}{N}} = \frac{1}{N_{\mathcal{R}}} \sum_{i=1}^{N} 1\left[\mathbf{x}_{i} \in \mathcal{R}\right] k_{i} \]
+\end{enumerate}

@@ -8,7 +8,7 @@
     \begin{enumerate}
         \item Without further assumptions, what parameters in the log wage equation can be consistently estimated? (\textcolor{red}{see p300-304, p315-319})
         
-        \textbf{Answer:} Assuming all elements of $\mathbf{z}_{it}$ are time-varying, the parameters $\theta_2, \delta_2 and \mathbf{\gamma}$ can be consistently estimated.
+        \textbf{Answer:} Assuming all elements of $\mathbf{z}_{it}$ are time-varying, the parameters $\theta_2, \delta_2$ and $\mathbf{\gamma}$ can be consistently estimated.
         
         \item Interpret the coefficients $\theta_{2}$ and $\delta_{2}$.
         
@@ -19,10 +19,10 @@
         where $\Delta \log \left( wage_{i}\right)=\log \left(wage_{i 2}\right)-\log \left(wage_{i 1}\right)$, and so on.
         
         \textbf{Answer:} Write
-        \begin{gather}
-            \log \left(wage_{i1}\right)=\theta_{1}+\mathbf{z}_{i1} \bm{\gamma}+\delta_{1} female_{i}+c_{i}+u_{i1} \label{eq:10.2-1} \\
-            \log \left(wage_{i2}\right)=\theta_{1}+\theta_{2}+\mathbf{z}_{i 2} \bm{\gamma}+\delta_{1} female_{i}+\delta_{2} \cdot female_{i}+c_{i}+u_{i2} \label{eq:10.2-2}
-        \end{gather}
+        \begin{align}
+            \log \left(wage_{i1}\right)&=\theta_{1}+\mathbf{z}_{i1} \bm{\gamma}+\delta_{1} female_{i}+c_{i}+u_{i1} \label{eq:10.2-1} \\
+            \log \left(wage_{i2}\right)&=\theta_{1}+\theta_{2}+\mathbf{z}_{i 2} \bm{\gamma}+\delta_{1} female_{i}+\delta_{2} \cdot female_{i}+c_{i}+u_{i2} \label{eq:10.2-2}
+        \end{align}
         Equations \eqref{eq:10.2-2} - \eqref{eq:10.2-1}, we have
         \begin{gather}
             \Delta \log \left(wage_{i}\right)=\theta_{2}+\Delta \mathbf{z}_{i} \bm{\gamma}+\delta_{2} female_{i}+\Delta u_{i} \label{eq:10.2-3}
@@ -205,7 +205,7 @@
     \[ y_{i t}=\alpha+\mathbf{d}_{t} \boldsymbol{\eta}+\mathbf{w}_{i t} \boldsymbol{\delta}+c_{i}+u_{i t}, \quad t=1, \ldots, T \]
     where $\mathbf{w}_{i t}$ is the $1 \times M$ vector of explanatory variables that vary across $i$ and $t$. Because the $\mathbf{d}_{t}$ do not change across $i$, we take them to be nonrandom. Because we have included an intercept in the model, we can assume that $E\left(c_{i}\right)=0 .$ Let 
     \[ \lambda = 1 - \left( \frac{1}{\displaystyle 1 + T \sigma_c^2 / \sigma_u^2} \right)^{1/2} \]
-    be the usual quasi-time-demeaning parameter for $\mathrm{RE}$ estimation. In what follows, we take $\lambda$ as known because estimating it does not affect the asymptotic distribution results.
+    be the usual quasi-time-demeaning parameter for $\mathrm{RE}$ estimation. In what follows, we take $\lambda$ as known because estimating it does not affect the asymptotic distribution results. (\textcolor{red}{see p326-331})
     
     \begin{enumerate}
         \item Show that we can write the quasi-time-demeaned equation for $\mathrm{RE}$ estimation as
@@ -237,7 +237,7 @@
         \textbf{Answer:} Recall the Assumptions RE.1, RE.2 and RE.3:
         \begin{itemize}
             \item Assumption RE.1: $\mathrm{E}(u_{it} \mid \mathbf{x}_i,c_i) = 0\ \&\ \mathrm{E}(c_i \mid \mathbf{x}_i) = \mathrm{E}(c_i) = 0$
-            \item Assumption RE.2: $\operatorname{rank} \mathrm{E}\left( \mathbf{x}_i^\prime \Omega^{-1} \mathbf{x}_i \right) = k$
+            \item Assumption RE.2: $\operatorname{rank} \mathrm{E}\left( \mathbf{X}_i^\prime \Omega^{-1} \mathbf{X}_i \right) = k$
             \item Assumption RE.3: $\mathrm{E}(u_i u_i^\prime \mid \mathbf{x}_i,c_i) = \sigma_u^2 \mathbf{I}_T \ \&\ \mathrm{E}(c_i^2 \mid \mathbf{x}_i) = \sigma_c^2$
         \end{itemize}
         Rewrite the equation \eqref{eq:10.17-3} with the conditions in this question: 

@@ -1,0 +1,72 @@
+\begin{enumerate}
+    \item[11.4] Recall the FE model
+    \[ y_{it} = c_i + \mathbf{x}_{it}\bm{\beta} + u_{it},\quad i = 1,2,\cdots,N;t = 1,2,\cdots,T \]
+    and the random trend model
+    \[ y_{i t}=c_{i}+g_{i} t+\mathbf{x}_{i t} \boldsymbol{\beta}+u_{i t}, \quad i = 1,2,\cdots,N;t = 1,2,\cdots,T \]
+    (\textcolor{red}{see p375-381})
+    \begin{enumerate}
+        \item Show that, in the FE model, a consistent estimator of $\mu_{c} \equiv \mathrm{E}\left(c_{i}\right)$ is 
+        \[\hat{\mu}_{c}=N^{-1} \sum_{i=1}^{N}\left(\bar{y}_{i}-\bar{\mathbf{x}}_{i} \hat{\boldsymbol{\beta}}_{F E}\right)\]
+        
+        \textbf{Answer:} From the FE model, we have
+        \begin{align*}
+            \bar{y}_i &= c_i + \bar{\mathbf{x}}_i \bm{\beta} + \bar{u}_i \implies \\
+            c_i &= \bar{y}_i - \bar{\mathbf{x}}_i \bm{\beta} - \bar{u}_i \implies \\
+            \mu_c &= \mathrm{E}(c_i) = \mathrm{E}(\bar{y}_i - \bar{\mathbf{x}}_i \bm{\beta}) - \mathrm{E}(\bar{u}_i) = \mathrm{E}(\bar{y}_i - \bar{\mathbf{x}}_i \bm{\beta})
+        \end{align*}
+        By the law of large number,
+        \[ \frac{1}{N} \sum_{i=1}^{N}\left(\bar{y}_{i}-\bar{\mathbf{x}}_{i} \boldsymbol{\beta}\right) \xrightarrow{P} \mu_c \implies \frac{1}{N} \sum_{i=1}^{N}\left(\bar{y}_{i}-\bar{\mathbf{x}}_{i} \boldsymbol{\beta}\right) = \mu_c + o_p(1) \]
+        Besides, We know that 
+        \begin{align*}
+            \hat{\bm{\beta}}_{FE} - \bm{\beta} &= o_p(1) \\
+            \frac{1}{N} \sum_{i=1}^{N} \bar{\mathbf{x}}_{i}&=O_{p}(1)
+        \end{align*}
+        so, for $\hat{\mu}_c$,
+        \begin{align*}
+            \hat{\mu}_{c}=\frac{1}{N} \sum_{i=1}^{N}\left(\bar{y}_{i}-\bar{\mathbf{x}}_{i} \hat{\boldsymbol{\beta}}_{F E}\right)&=\frac{1}{N} \sum_{i=1}^{N}\left(\bar{y}_{i}-\bar{\mathbf{x}}_{i} \boldsymbol{\beta}\right)-\left(\frac{1}{N} \sum_{i=1}^{N} \bar{\mathbf{x}}_{i}\right)\left(\hat{\boldsymbol{\beta}}_{F E}-\boldsymbol{\beta}\right) \\
+            &= \left[ \mu_c + o_p(1) \right] - O_p(1)\cdot o_p(1) \\
+            &= \mu_c + o_p(1)
+        \end{align*}
+        That is, $\hat{\mu}_c$ is a consistent estimator of $\mu_c$.
+        
+        \item In the random trend model, how would you estimate $\mu_{g}=\mathrm{E}\left(g_{i}\right)$ ?
+        
+        \textbf{Answer:} Here we introduce two methods for estimating $\mu_g$:
+        
+        \textbf{First mothod:} Doing first difference transformation for random trend model, we have
+        \[ \Delta y_{i t}=g_{i}+\Delta\mathbf{x}_{i t} \boldsymbol{\beta}+\Delta u_{i t},\quad N = 1,2,\cdots,N; t=2, \cdots, T \]
+        Then we can estimate $\bm{\beta}$ by fixed effect model approach, say $\hat{\mathbf{\beta}}_{FE}$. Same as part a, a consistent estimator of $\mu_g$ will be
+        \[\hat{\mu}_{g}=\frac{1}{N} \sum_{i=1}^{N}\left(\overline{\Delta y}_{i}-\overline{\Delta\mathbf{x}}_{i} \hat{\boldsymbol{\beta}}_{F E}\right)\]
+        
+        \textbf{Second method:} Let $\mathbf{z}_{it} = (1,t), \mathbf{a}_i = (c_i, g_i)^\prime$. Then the random trend model can be rewritten as
+        \begin{gather*}
+            y_{i t}=\mathbf{z}_{it}\mathbf{a}_i+\mathbf{x}_{i t} \boldsymbol{\beta}+u_{i t}, \quad i = 1,2,\cdots,N;t = 1,2,\cdots,T 
+        \end{gather*}
+        Stack the above equations in time,
+        \begin{gather}
+            y_{i}=\mathbf{z}_{i}\mathbf{a}_i+\mathbf{x}_{i} \boldsymbol{\beta}+u_{i}, \quad i = 1,2,\cdots,N \label{eq:11.4-1}
+        \end{gather}
+        Define a annihilated matrix
+        \[ \mathbf{M}_i = \mathbf{I}_T - \mathbf{z}_i(\mathbf{z}_i^\prime \mathbf{z}_i )^{-1} \mathbf{z}_i \]
+        Apply it to the equation \eqref{eq:11.4-1},
+        \begin{align*}
+            \mathbf{M}_i y_{i}&=\mathbf{M}_i \mathbf{z}_{i}\mathbf{a}_i+\mathbf{M}_i \mathbf{x}_{i} \boldsymbol{\beta}+\mathbf{M}_i u_{i} \implies \\
+            \ddot{y}_i &= \ddot{\mathbf{x}}_i \bm{\beta} + \ddot{u}_i
+        \end{align*}
+        Then we can use the usual OLS procedure to obtain $\hat{\bm{\beta}}_{FE}$:
+        \begin{align*}
+            \hat{\boldsymbol{\beta}}_{F E}&=\left(\sum_{i=1}^{N} \ddot{\mathbf{x}}_{i}^{\prime} \ddot{\mathbf{x}}_{i}\right)^{-1}\left(\sum_{i=1}^{N} \ddot{\mathbf{x}}_{i}^{\prime} \ddot{\mathbf{y}}_{i}\right) \\
+            &= \bm{\beta} + \left(\sum_{i=1}^{N} \ddot{\mathbf{x}}_{i}^{\prime} \ddot{\mathbf{x}}_{i}\right)^{-1}\left(\sum_{i=1}^{N} \ddot{\mathbf{x}}_{i}^{\prime} \ddot{u}_{i}\right) \\
+            &= \bm{\beta} + \left(\sum_{i=1}^{N} \ddot{\mathbf{x}}_{i}^{\prime} \ddot{\mathbf{x}}_{i}\right)^{-1}\left(\sum_{i=1}^{N} \ddot{\mathbf{x}}_{i}^{\prime} u_{i}\right) \xrightarrow{P} \bm{\beta}
+        \end{align*}
+        Multiply both sides of equation \eqref{eq:11.4-1} by $\left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime$,
+        \begin{align*}
+            \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime y_i &= \mathbf{a}_i + \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime \mathbf{x}_i\bm{\beta} + \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime u_i \implies \\
+            \mathbf{a}_i &= \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime(y_i - \mathbf{x}_i\bm{\beta}) - \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime u_i \implies \\
+            \mathrm{E}(\mathbf{a}_i) &= \mathrm{E}\left[ \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime(y_i - \mathbf{x}_i\bm{\beta}) \right] - \mathrm{E} \left[ \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime u_i \right] = \mathrm{E}\left[ \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime(y_i - \mathbf{x}_i\bm{\beta}) \right]
+        \end{align*}
+        Under the similar procedures in part a, we can deduce that a consistent estimator of $\mathrm{E}(\mathbf{a}_i)$ will be
+        \[ \widehat{\mathrm{E}(\mathbf{a}_i)} = \frac{1}{N} \sum_{i=1}^N \left( \mathbf{z}_i^\prime \mathbf{z}_i \right) \mathbf{z}_i^\prime(y_i - \mathbf{x}_i\hat{\bm{\beta}}_{FE})  \]
+        Then we can obtain the consistent estimator of $\mu_g$ from $\widehat{\mathrm{E}(\mathbf{a}_i)}$.
+    \end{enumerate}
+\end{enumerate}

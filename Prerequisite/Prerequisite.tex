@@ -1,0 +1,23 @@
+\textbf{Law of Iterated Expectations: }$ E[E(Y|X)] = E(Y), E[E(Y|X_1,X_2)|X_1] = E(Y|X_1) $
+
+\textbf{op: }$ X_n = o_p(r_n) \iff \frac{X_n}{r_n} \xrightarrow{P} 0 \iff \lim\limits_{n\to\infty} P\left( \left| \frac{X_n}{r_n} \right| \geq \varepsilon \right) = 0, \forall \varepsilon > 0 $
+
+\textbf{Op: }$ X_n = O_p(r_n) \iff \forall \varepsilon > 0, \exists K > 0, N > 0$, such that: $P\left(\left|\frac{X_{n}}{r_n}\right|>K\right)<\varepsilon, \forall n>N$
+
+\textbf{Consistency and op: } if $\hat{\bm{\beta}} \xrightarrow{P} \bm{\beta}$, then we can write $\hat{\bm{\beta}} = \bm{\beta} + o_p(1)$
+
+\textbf{Convergence in distribution and Op: }If $\mathbf{x}_{N} \stackrel{d}{\rightarrow} \mathbf{x}$, where $\mathbf{x}$ is any $k \times 1$ random vector, then $\mathbf{x}_{N}=\mathrm{O}_{p}(1)$.
+
+\textbf{Continuous Mapping Theorem: }let $ f(\cdot) $ be a continuous function, then 
+\begin{itemize}
+\item $ X_n \xrightarrow{P} X \implies f(X_n) \xrightarrow{P} f(X) $
+\item $ X_n \xrightarrow{a.s.} X \implies f(X_n) \xrightarrow{a.s.} f(X) $
+\item $ X_n \xrightarrow{d} X \implies f(X_n) \xrightarrow{d} f(X) $
+\item If $X_{n} \xrightarrow{d} X$ and $Z_{n}-X_{n} \xrightarrow{P} 0,$ then: $Z_{n} \xrightarrow{d} X$.
+\item If $X_{n} \xrightarrow{d} X$ and $Y_{n} \xrightarrow{P} C,$ then: $\left(X_{n}, Y_{n}\right) \xrightarrow{d} (X, C)$
+\item If $X_{n} \xrightarrow{P} X$ and $Y_{n} \xrightarrow{P} Y,$ then: $\left(X_{n}, Y_{n}\right) \xrightarrow{P} (X, Y)$
+\end{itemize}
+
+\textbf{CLT for Econometrics: }Let $\left\{\mathbf{w}_{i}: i=1,2, \ldots\right\}$ be a sequence of independent, identically distributed $G \times 1$ random vectors such that $\mathrm{E}\left(w_{i g}^{2}\right)<\infty$, $g=1, \ldots, G$, and $\mathrm{E}\left(\mathbf{w}_{i}\right)=\mathbf{0}$. Then $\left\{\mathbf{w}_{i}: i=1,2, \ldots\right\}$ satisfies the central limit theorem $(\mathbf{C L T}) ;$ that is,
+\[ N^{-1 / 2} \sum_{i=1}^{N} \mathbf{w}_{i} \xrightarrow{d} N(\mathbf{0}, \mathbf{B}) \]
+where $\mathbf{B}=\operatorname{Var}\left(\mathbf{w}_{i}\right)=\mathrm{E}\left(\mathbf{w}_{i} \mathbf{w}_{i}^{\prime}\right)$.
